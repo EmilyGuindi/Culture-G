@@ -1,0 +1,96 @@
+import { store } from "../store.js";
+import { navigate } from "../router.js";
+
+function barColor(pct) {
+  if (pct >= 70) return "var(--success)";
+  if (pct >= 40) return "var(--gold)";
+  return "var(--danger)";
+}
+
+export async function renderProfile() {
+  const themes = store.getThemeScores();
+  const played = themes.filter((t) => t.played);
+  const strong = store.strongestTheme();
+  const weak = store.weakestTheme();
+  const global = store.getGlobalScore();
+
+  const el = document.createElement("div");
+  el.className = "stagger";
+
+  el.innerHTML = `
+    <header class="page-head">
+      <span class="eyebrow">Mon profil</span>
+      <h1>Ma culture G</h1>
+    </header>
+
+    <section class="card profile-hero">
+      <div class="avatar">CG</div>
+      <div class="stat-value" style="font-size:2.4rem;color:var(--navy);">${global}<span style="font-size:1.1rem;color:var(--ink-faint);">/100</span></div>
+      <div class="stat-label">Score global de culture générale</div>
+      <div class="progress" style="max-width:260px;margin:14px auto 0;"><span style="width:${global}%"></span></div>
+    </section>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-value"><span class="flame">🔥</span> ${store.state.streak}</div>
+        <div class="stat-label">Streak actuelle</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">${store.completedCount}</div>
+        <div class="stat-label">Leçons terminées</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">${store.state.bestStreak}</div>
+        <div class="stat-label">Meilleure streak</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">${played.length}/${themes.length}</div>
+        <div class="stat-label">Thèmes explorés</div>
+      </div>
+    </div>
+
+    ${
+      strong || weak
+        ? `<h3 class="section-title">Forces & faiblesses</h3>
+      <section class="card">
+        ${strong ? `<div class="list-item"><span>💪 Point fort</span><strong>${strong.icon} ${strong.label} · ${strong.pct}%</strong></div>` : ""}
+        ${weak && (!strong || weak.id !== strong.id) ? `<div class="list-item"><span>🎯 À travailler</span><strong>${weak.icon} ${weak.label} · ${weak.pct}%</strong></div>` : ""}
+      </section>`
+        : ""
+    }
+
+    <h3 class="section-title">Maîtrise par thème</h3>
+    <section class="card">
+      <div class="themes">
+        ${themes
+          .map((t) => {
+            const pct = t.pct ?? 0;
+            return `
+            <div class="theme-row">
+              <span class="t-name">${t.icon} ${t.label}</span>
+              <span class="bar"><span style="width:${pct}%;background:${barColor(pct)}"></span></span>
+              <span class="pct">${t.played ? pct + "%" : "—"}</span>
+            </div>`;
+          })
+          .join("")}
+      </div>
+      ${played.length === 0 ? `<p class="muted center" style="margin-top:14px;">Terminez des quiz pour révéler vos statistiques.</p>` : ""}
+    </section>
+
+    <div class="btn-row" style="margin-top:24px;">
+      <button class="btn btn-primary" id="go">Faire ma leçon du jour</button>
+      <button class="btn btn-ghost" id="reset">Réinitialiser ma progression</button>
+    </div>
+  `;
+
+  el.querySelector("#go").addEventListener("click", () => navigate("home"));
+  el.querySelector("#reset").addEventListener("click", () => {
+    if (confirm("Réinitialiser toute votre progression ? Cette action est irréversible.")) {
+      store.reset();
+      navigate("home");
+      location.reload();
+    }
+  });
+
+  return el;
+}
