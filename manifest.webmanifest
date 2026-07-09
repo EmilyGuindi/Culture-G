@@ -1,0 +1,27 @@
+{
+  "name": "Culture G Daily",
+  "short_name": "Culture G",
+  "description": "Développez votre culture générale en 5 minutes par jour.",
+  "lang": "fr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F7F2E9",
+  "theme_color": "#F7F2E9",
+  "categories": ["education", "lifestyle"],
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
