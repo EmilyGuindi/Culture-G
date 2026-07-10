@@ -513,6 +513,73 @@ h1, h2, h3 { font-family: var(--font-editorial); font-weight: 600; margin: 0; le
 .big-progress { display: flex; align-items: baseline; gap: 8px; justify-content: center; }
 .big-progress .bp-num { font-family: var(--font-editorial); font-size: 2.6rem; font-weight: 700; color: var(--gold); }
 
+/* =========================================================
+   IA — bannière, réglages, formulaires, badges
+   ========================================================= */
+
+.icon-btn {
+  flex: none;
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+}
+.icon-btn:hover { background: var(--cream-soft); }
+
+.ai-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+  border: 1px solid var(--gold-soft);
+  background: linear-gradient(120deg, #fbf4e4, #fff);
+  position: relative; overflow: hidden;
+}
+.ai-banner.on { border-color: var(--gold); }
+.ai-banner-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ai-banner-txt strong { font-size: 0.95rem; }
+.ai-banner-txt .muted { font-size: 0.8rem; }
+.ai-banner.loading::after {
+  content: ""; position: absolute; left: 0; bottom: 0; height: 3px; width: 40%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: slide 1.1s infinite;
+}
+@keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(350%); } }
+
+.ia-tag {
+  display: inline-block;
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em;
+  vertical-align: middle;
+  padding: 1px 6px; border-radius: 999px;
+  background: linear-gradient(150deg, #f3e6c6, var(--gold-soft));
+  color: #6b5320;
+}
+
+/* Formulaires (réglages) */
+.form-label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px; }
+.input {
+  width: 100%;
+  font-family: var(--font-body); font-size: 1rem;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--cream-soft);
+  color: var(--ink);
+}
+.input:focus { outline: none; border-color: var(--navy); background: #fff; }
+select.input { appearance: none; cursor: pointer; }
+
+.ai-status {
+  font-size: 0.85rem; font-weight: 600;
+  padding: 8px 12px; border-radius: var(--radius-sm);
+  background: var(--cream-soft); border: 1px solid var(--line);
+}
+.ai-status.on { color: var(--success); background: #eef7f2; border-color: #cfe8dc; }
+.ai-status.off { color: var(--ink-faint); }
+
 </style>
 
 <div id="app" class="app-shell">
@@ -3154,13 +3221,13 @@ function pickDailyLessonId(dateStr) {
 /**
  * Provider de leçons — couche d'abstraction.
  *
- * Aujourd'hui : source locale (leçons fictives dans lessons.js).
- * Demain : brancher une API IA sans toucher au reste de l'app.
+ * Source de base : leçons locales (lessons.js).
+ * Extension : leçons générées par IA, persistées dans le localStorage et
+ * fusionnées de façon transparente (même schéma, mêmes méthodes).
  *
  * Toutes les pages passent UNIQUEMENT par ce provider (jamais par
- * lessons.js directement). Pour connecter une IA plus tard, il suffit
- * d'implémenter la même interface dans une classe `AiLessonProvider`
- * et de changer la ligne `export const lessons = ...` en bas.
+ * lessons.js directement). Le générateur IA (js/ai/generator.js) y ajoute
+ * ses leçons via addGenerated() ; aucune page n'a besoin d'être modifiée.
  *
  * Interface :
  *   getCategories()                -> Category[]
@@ -3168,49 +3235,244 @@ function pickDailyLessonId(dateStr) {
  *   getLesson(id)                  -> Promise<Lesson | null>
  *   getDailyLesson(dateStr)        -> Promise<Lesson>
  *   getByCategory(categoryId)      -> Promise<Lesson[]>
+ *   addGenerated(lesson)           -> void   (leçon IA persistée)
+ *   getGenerated()                 -> Lesson[]
  */
 
+
+const GEN_KEY = "culture-g-generated:v1";
 
 class LocalLessonProvider {
   getCategories() {
     return CATEGORIES;
   }
 
+  getGenerated() {
+    try {
+      return JSON.parse(localStorage.getItem(GEN_KEY) || "[]");
+    } catch (_) {
+      return [];
+    }
+  }
+
+  addGenerated(lesson) {
+    const all = this.getGenerated();
+    all.unshift(lesson); // les plus récentes en tête
+    try {
+      localStorage.setItem(GEN_KEY, JSON.stringify(all));
+    } catch (e) {
+      console.warn("Impossible de sauvegarder la leçon générée", e);
+    }
+  }
+
+  _pool() {
+    // leçons générées d'abord (mises en avant), puis le socle
+    return [...this.getGenerated(), ...LESSONS];
+  }
+
   async getAllLessons() {
-    return LESSONS;
+    return this._pool();
   }
 
   async getLesson(id) {
-    return LESSONS.find((l) => l.id === id) || null;
+    return this._pool().find((l) => l.id === id) || null;
   }
 
   async getDailyLesson(dateStr) {
+    // la leçon du jour reste choisie dans le socle stable
     const id = pickDailyLessonId(dateStr);
     return this.getLesson(id);
   }
 
   async getByCategory(categoryId) {
-    return LESSONS.filter((l) => l.category === categoryId);
+    return this._pool().filter((l) => l.category === categoryId);
   }
 }
 
+const lessons = new LocalLessonProvider();
+
+
+/* ===== js/ai/generator.js ===== */
 /**
- * Exemple de squelette pour brancher une IA plus tard.
- * Décommenter et implémenter, puis remplacer l'export ci-dessous.
+ * Générateur de leçons par IA (API Claude / Anthropic).
  *
- * class AiLessonProvider {
- *   constructor(apiBaseUrl, apiKey) { ... }
- *   async getLesson(id) {
- *     const res = await fetch(`${this.apiBaseUrl}/lessons/${id}`, {
- *       headers: { Authorization: `Bearer ${this.apiKey}` },
- *     });
- *     return res.json(); // doit respecter le même schéma que lessons.js
- *   }
- *   // ... implémenter les autres méthodes à l'identique
- * }
+ * S'appuie sur la couche provider : une leçon générée respecte EXACTEMENT
+ * le même schéma que les leçons locales (voir js/data/lessons.js), et est
+ * ajoutée à la bibliothèque via le provider.
+ *
+ * ⚠️ Appel direct depuis le navigateur : la clé API est stockée dans le
+ * localStorage de CE navigateur uniquement. À réserver à un usage personnel.
+ * (Ne fonctionne pas dans l'aperçu « artifact » où les requêtes externes
+ * sont bloquées — utiliser la version déployée ou locale.)
  */
 
-const lessons = new LocalLessonProvider();
+
+const KEY_API = "culture-g-ai:key";
+const KEY_MODEL = "culture-g-ai:model";
+
+const DEFAULT_MODEL = "claude-opus-4-8";
+
+/** Modèles proposés (du plus économique au plus capable). */
+const AI_MODELS = [
+  { id: "claude-haiku-4-5", label: "Haiku 4.5 — rapide & économique" },
+  { id: "claude-sonnet-5", label: "Sonnet 5 — équilibré" },
+  { id: "claude-opus-4-8", label: "Opus 4.8 — le plus capable" },
+];
+
+const aiConfig = {
+  getKey: () => localStorage.getItem(KEY_API) || "",
+  setKey: (v) => localStorage.setItem(KEY_API, v.trim()),
+  clearKey: () => localStorage.removeItem(KEY_API),
+  getModel: () => localStorage.getItem(KEY_MODEL) || DEFAULT_MODEL,
+  setModel: (v) => localStorage.setItem(KEY_MODEL, v),
+  isEnabled: () => !!localStorage.getItem(KEY_API),
+};
+
+function categoryLabel(id) {
+  return (CATEGORIES.find((c) => c.id === id) || {}).label || id;
+}
+
+function buildSystemPrompt() {
+  return [
+    "Tu es un auteur de contenus de culture générale pour une app éducative francophone.",
+    "Tu écris des micro-leçons claires, rigoureuses, vivantes et accessibles à un large public.",
+    "Tu réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, sans balises Markdown.",
+    "Schéma exact attendu :",
+    "{",
+    '  "title": string,            // titre du sujet, concis',
+    '  "summary": string,          // accroche d\'une phrase',
+    '  "body": string[],           // 6 à 7 paragraphes, 400 à 600 mots au total',
+    '  "retenir": string,          // l\'essentiel à retenir, 1-2 phrases',
+    '  "funFact": string,          // un fait surprenant à ressortir',
+    '  "quiz": [                   // EXACTEMENT 3 questions',
+    "    {",
+    '      "question": string,',
+    '      "options": string[],    // EXACTEMENT 4 propositions',
+    '      "answer": number,       // index (0-3) de la bonne réponse',
+    '      "explain": string       // courte explication',
+    "    }",
+    "  ]",
+    "}",
+    "Contraintes : français impeccable, faits exacts et à jour, ton engageant mais sérieux, aucune information sensible ou dangereuse.",
+  ].join("\n");
+}
+
+async function buildUserPrompt(categoryId) {
+  const existing = await lessons.getByCategory(categoryId);
+  const titles = existing.map((l) => l.title).slice(0, 20);
+  return [
+    `Génère une nouvelle leçon de culture générale dans le thème « ${categoryLabel(categoryId)} ».`,
+    "Choisis un sujet précis, intéressant et pas trop technique.",
+    titles.length
+      ? `Évite ces sujets déjà traités : ${titles.join(" ; ")}.`
+      : "",
+    "Réponds uniquement avec l'objet JSON du schéma.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+/** Extrait et parse le JSON d'une réponse (tolère d'éventuelles balises). */
+function parseLessonJSON(text) {
+  let t = (text || "").trim();
+  // retire d'éventuelles clôtures Markdown ```json ... ```
+  t = t.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+  // isole le premier objet { ... } si du texte l'entoure
+  const start = t.indexOf("{");
+  const end = t.lastIndexOf("}");
+  if (start > 0 || end < t.length - 1) t = t.slice(start, end + 1);
+  return JSON.parse(t);
+}
+
+/** Vérifie qu'une leçon générée respecte le schéma attendu. */
+function validateLesson(l) {
+  const errs = [];
+  if (!l || typeof l !== "object") return ["Réponse vide."];
+  if (typeof l.title !== "string" || !l.title.trim()) errs.push("titre manquant");
+  if (typeof l.summary !== "string") errs.push("résumé manquant");
+  if (!Array.isArray(l.body) || l.body.length < 3) errs.push("corps manquant");
+  if (typeof l.retenir !== "string") errs.push("« à retenir » manquant");
+  if (typeof l.funFact !== "string") errs.push("« fait stylé » manquant");
+  if (!Array.isArray(l.quiz) || l.quiz.length !== 3) errs.push("quiz ≠ 3 questions");
+  else
+    l.quiz.forEach((q, i) => {
+      if (!q || typeof q.question !== "string") errs.push(`Q${i + 1} sans énoncé`);
+      if (!Array.isArray(q.options) || q.options.length !== 4) errs.push(`Q${i + 1} ≠ 4 options`);
+      if (typeof q.answer !== "number" || q.answer < 0 || q.answer > 3) errs.push(`Q${i + 1} réponse invalide`);
+    });
+  return errs;
+}
+
+/**
+ * Appelle l'API Claude et renvoie une leçon prête à l'emploi, déjà ajoutée
+ * à la bibliothèque via le provider.
+ * @param {string} categoryId
+ * @returns {Promise<object>} la leçon générée
+ */
+async function generateLesson(categoryId) {
+  const apiKey = aiConfig.getKey();
+  if (!apiKey) throw new Error("Aucune clé API configurée. Ouvre les réglages IA.");
+
+  const model = aiConfig.getModel();
+  const body = {
+    model,
+    max_tokens: 2000,
+    system: buildSystemPrompt(),
+    messages: [{ role: "user", content: await buildUserPrompt(categoryId) }],
+  };
+
+  let res;
+  try {
+    res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+        "anthropic-dangerous-direct-browser-access": "true",
+      },
+      body: JSON.stringify(body),
+    });
+  } catch (e) {
+    throw new Error(
+      "Impossible de joindre l'API (réseau bloqué ?). L'IA fonctionne sur la version déployée ou en local, pas dans l'aperçu."
+    );
+  }
+
+  if (!res.ok) {
+    let detail = "";
+    try {
+      const err = await res.json();
+      detail = err?.error?.message || "";
+    } catch (_) {}
+    if (res.status === 401) throw new Error("Clé API invalide (401). Vérifie ta clé.");
+    if (res.status === 429) throw new Error("Trop de requêtes (429). Réessaie dans un instant.");
+    throw new Error(`Erreur API ${res.status}. ${detail}`.trim());
+  }
+
+  const data = await res.json();
+  const textBlock = (data.content || []).find((b) => b.type === "text");
+  if (!textBlock) throw new Error("Réponse inattendue de l'API.");
+
+  let lesson;
+  try {
+    lesson = parseLessonJSON(textBlock.text);
+  } catch (e) {
+    throw new Error("La réponse de l'IA n'était pas un JSON valide. Réessaie.");
+  }
+
+  const problems = validateLesson(lesson);
+  if (problems.length) throw new Error("Leçon incomplète : " + problems.join(", "));
+
+  // Complète les champs techniques et enregistre
+  lesson.id = `${categoryId}-ia-${Date.now().toString(36)}`;
+  lesson.category = categoryId;
+  lesson.minutes = 5;
+  lesson.generated = true;
+
+  lessons.addGenerated(lesson);
+  return lesson;
+}
 
 
 /* ===== js/store.js ===== */
@@ -4005,15 +4267,26 @@ async function renderLibrary(params) {
   el.className = "stagger";
 
   const filtered = active === "all" ? all : all.filter((l) => l.category === active);
-
   const catById = Object.fromEntries(cats.map((c) => [c.id, c]));
+  const aiOn = aiConfig.isEnabled();
 
   el.innerHTML = `
-    <header class="page-head">
-      <span class="eyebrow">Explorer</span>
-      <h1>Bibliothèque</h1>
-      <p>Choisissez un thème et progressez à votre rythme.</p>
+    <header class="page-head" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+      <div>
+        <span class="eyebrow">Explorer</span>
+        <h1>Bibliothèque</h1>
+        <p>${all.length} sujets · choisis un thème et progresse.</p>
+      </div>
+      <button class="icon-btn" id="settings" title="Réglages IA">⚙️</button>
     </header>
+
+    <section class="ai-banner ${aiOn ? "on" : ""}">
+      <div class="ai-banner-txt">
+        <strong>✨ Leçons par IA</strong>
+        <span class="muted">${aiOn ? "Génère une nouvelle leçon quand tu veux." : "Active l'IA pour des leçons illimitées."}</span>
+      </div>
+      <button class="btn btn-primary small" id="generate">${aiOn ? "Générer une leçon" : "Activer l'IA"}</button>
+    </section>
 
     <div class="filter-row">
       <button class="filter ${active === "all" ? "active" : ""}" data-cat="all">Tous</button>
@@ -4033,7 +4306,7 @@ async function renderLibrary(params) {
           <div class="topic" data-id="${l.id}">
             <div class="ic">${c.icon}</div>
             <div class="t-main">
-              <div class="t-title">${l.title}</div>
+              <div class="t-title">${l.title} ${l.generated ? '<span class="ia-tag">IA</span>' : ""}</div>
               <div class="t-cat">${c.label} · ${l.minutes} min</div>
             </div>
             <span class="status ${st.cls}">${st.txt}</span>
@@ -4044,11 +4317,36 @@ async function renderLibrary(params) {
     </div>
   `;
 
+  el.querySelector("#settings").addEventListener("click", () => navigate("settings"));
+
   el.querySelectorAll(".filter").forEach((btn) => {
     btn.addEventListener("click", () => navigate("library", { cat: btn.dataset.cat }));
   });
   el.querySelectorAll(".topic").forEach((t) => {
     t.addEventListener("click", () => navigate("lesson", { id: t.dataset.id }));
+  });
+
+  el.querySelector("#generate").addEventListener("click", async () => {
+    if (!aiConfig.isEnabled()) {
+      navigate("settings");
+      return;
+    }
+    // thème : filtre actif, sinon aléatoire
+    const catId = active !== "all" ? active : cats[Math.floor(Math.random() * cats.length)].id;
+    const btn = el.querySelector("#generate");
+    const banner = el.querySelector(".ai-banner");
+    btn.disabled = true;
+    btn.textContent = "Génération…";
+    banner.classList.add("loading");
+    try {
+      const lesson = await generateLesson(catId);
+      navigate("lesson", { id: lesson.id });
+    } catch (e) {
+      banner.classList.remove("loading");
+      btn.disabled = false;
+      btn.textContent = "Réessayer";
+      alert("Génération impossible.\n\n" + (e.message || e));
+    }
   });
 
   return el;
@@ -4181,6 +4479,88 @@ async function renderProfile() {
 }
 
 
+/* ===== js/pages/settings.js ===== */
+
+async function renderSettings() {
+  const el = document.createElement("div");
+  el.className = "stagger";
+
+  const enabled = aiConfig.isEnabled();
+  const model = aiConfig.getModel();
+
+  el.innerHTML = `
+    <button class="btn btn-ghost" id="back">← Retour</button>
+
+    <header class="page-head">
+      <span class="eyebrow">Réglages</span>
+      <h1>Leçons par IA</h1>
+      <p>Branche une clé API Claude pour générer des leçons à l'infini, sur tous les thèmes.</p>
+    </header>
+
+    <section class="card stack">
+      <div>
+        <label class="form-label" for="key">Clé API Anthropic</label>
+        <input class="input" id="key" type="password" autocomplete="off" spellcheck="false"
+          placeholder="sk-ant-..." value="${enabled ? "••••••••••••••••" : ""}" />
+        <p class="muted" style="font-size:.8rem;margin-top:6px;">
+          Obtiens une clé sur <strong>console.anthropic.com</strong> → API Keys.
+          Elle est stockée uniquement dans ce navigateur (usage personnel).
+        </p>
+      </div>
+
+      <div>
+        <label class="form-label" for="model">Modèle</label>
+        <select class="input" id="model">
+          ${AI_MODELS.map(
+            (m) => `<option value="${m.id}" ${m.id === model ? "selected" : ""}>${m.label}</option>`
+          ).join("")}
+        </select>
+      </div>
+
+      <div id="status" class="ai-status ${enabled ? "on" : "off"}">
+        ${enabled ? "✅ IA activée" : "⚪️ IA non configurée"}
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" id="save">Enregistrer</button>
+        ${enabled ? `<button class="btn btn-outline" id="clear">Supprimer la clé</button>` : ""}
+      </div>
+    </section>
+
+    <div class="callout stylé" style="margin-top:18px;">
+      <div class="callout-title">💡 Bon à savoir</div>
+      <p>La génération par IA fonctionne sur la version <strong>déployée</strong> (GitHub Pages) ou en local.
+      Dans l'aperçu « artifact », les appels réseau externes sont bloqués : les 50 leçons intégrées restent, mais la génération est indisponible.</p>
+    </div>
+  `;
+
+  el.querySelector("#back").addEventListener("click", () => history.back());
+
+  el.querySelector("#save").addEventListener("click", () => {
+    const raw = el.querySelector("#key").value.trim();
+    aiConfig.setModel(el.querySelector("#model").value);
+    // ne réécrit la clé que si l'utilisateur a saisi autre chose que le masque
+    if (raw && !/^•+$/.test(raw)) aiConfig.setKey(raw);
+    const status = el.querySelector("#status");
+    if (aiConfig.isEnabled()) {
+      status.className = "ai-status on";
+      status.textContent = "✅ IA activée — enregistré";
+    }
+    setTimeout(() => navigate("library"), 600);
+  });
+
+  const clearBtn = el.querySelector("#clear");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      aiConfig.clearKey();
+      navigate("settings");
+    });
+  }
+
+  return el;
+}
+
+
 /* ===== js/app.js ===== */
 /**
  * Culture G Daily — point d'entrée.
@@ -4194,6 +4574,7 @@ register("lesson", renderLesson);
 register("quiz", renderQuiz);
 register("library", renderLibrary);
 register("profile", renderProfile);
+register("settings", renderSettings);
 
 setNotFound(renderHome);
 

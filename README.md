@@ -12,10 +12,12 @@ une API IA qui génère les leçons.
 - **Leçon du jour** : texte court (400–600 mots), encadrés « À retenir » et « Le fait stylé à ressortir ».
 - **Quiz** : 3 questions à choix multiple, feedback immédiat, score final.
 - **Bibliothèque** : 7 thèmes (Histoire, Géopolitique, Sciences, Économie, Philosophie, Arts, Technologie),
-  cartes de sujets avec statut (non commencé / en cours / maîtrisé).
+  50 sujets avec statut (non commencé / en cours / maîtrisé).
 - **Profil** : streak, leçons terminées, thèmes forts/faibles, score global de culture générale.
+- **Gamification** : XP, 9 niveaux, 12 badges, objectif quotidien, confettis.
+- **Génération par IA** (optionnelle) : crée des leçons illimitées via l'API Claude.
 - Progression **persistée dans le `localStorage`**.
-- **Responsive** mobile & desktop, avec animations légères de transition.
+- **PWA installable** (mobile & desktop) avec animations légères de transition.
 
 ## 🚀 Lancer l'app
 
@@ -46,18 +48,22 @@ js/
   pages/                → home, lesson, quiz, library, profile
 ```
 
-### Brancher une API IA plus tard
+### Génération par IA (intégrée)
 
-Tout le contenu passe par `js/data/provider.js` (jamais par `lessons.js` directement).
-Pour connecter une IA, il suffit d'implémenter la **même interface** dans une classe
-`AiLessonProvider` (un squelette commenté est déjà fourni) puis de remplacer la ligne :
+Le contenu passe par `js/data/provider.js` (jamais par `lessons.js` directement).
+Le générateur IA (`js/ai/generator.js`) appelle l'**API Claude** pour créer de
+nouvelles leçons **à la volée**, au même schéma que les leçons locales, et les
+ajoute à la bibliothèque via `provider.addGenerated()`. Aucune page n'est modifiée :
+les leçons IA apparaissent comme les autres (avec un badge « IA »).
 
-```js
-export const lessons = new LocalLessonProvider();
-// →
-export const lessons = new AiLessonProvider(API_URL, API_KEY);
-```
+**Activer l'IA** : Bibliothèque → ⚙️ → coller une clé API Anthropic
+(`console.anthropic.com` → API Keys) et choisir un modèle. La clé est stockée
+**uniquement dans le navigateur** (usage personnel), et le bouton
+« Générer une leçon » crée un nouveau sujet sur le thème choisi.
 
-Les leçons renvoyées par l'API doivent respecter le schéma décrit en tête de `lessons.js`
-(`title`, `category`, `body[]`, `retenir`, `funFact`, `quiz[]`…). Aucune page n'a besoin
-d'être modifiée.
+> ⚠️ La génération IA nécessite un appel réseau vers `api.anthropic.com` : elle
+> fonctionne sur la version **déployée** (GitHub Pages) ou en **local**, mais pas
+> dans l'aperçu « artifact » (requêtes externes bloquées). Les 50 leçons intégrées
+> restent disponibles partout, hors ligne.
+
+Modèle par défaut : `claude-opus-4-8` (choix Haiku / Sonnet / Opus dans les réglages).

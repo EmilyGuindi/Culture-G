@@ -11,12 +11,14 @@ import { renderLesson } from "./pages/lesson.js";
 import { renderQuiz } from "./pages/quiz.js";
 import { renderLibrary } from "./pages/library.js";
 import { renderProfile } from "./pages/profile.js";
+import { renderSettings } from "./pages/settings.js";
 
 register("home", renderHome);
 register("lesson", renderLesson);
 register("quiz", renderQuiz);
 register("library", renderLibrary);
 register("profile", renderProfile);
+register("settings", renderSettings);
 
 setNotFound(renderHome);
 
