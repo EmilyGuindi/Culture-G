@@ -1830,6 +1830,790 @@ export const LESSONS = [
       },
     ],
   },
+  {
+    id: "egypte-antique",
+    title: "L'Égypte des pharaons",
+    category: "histoire",
+    minutes: 5,
+    summary: "Une civilisation d'une stabilité inouïe, qui a duré près de trois mille ans.",
+    body: [
+      "Quand on parle de l'Égypte antique, on imagine aussitôt les pyramides, les hiéroglyphes et les pharaons. Mais le fait le plus stupéfiant est la durée de cette civilisation : près de trois mille ans de continuité, soit un écart de temps plus grand entre les premières pyramides et Cléopâtre qu'entre Cléopâtre et nous. Peu de cultures ont connu une telle stabilité.",
+      "Cette longévité doit presque tout au Nil. Chaque année, ses crues déposaient un limon fertile sur les rives, permettant des récoltes abondantes dans un désert par ailleurs hostile. Les Égyptiens vivaient au rythme du fleuve, qui structurait leur calendrier, leur agriculture et leur vision du monde. « L'Égypte est un don du Nil », résumait déjà l'historien grec Hérodote.",
+      "Au sommet de la société régnait le pharaon, à la fois roi et figure sacrée, considéré comme un intermédiaire entre les hommes et les dieux. Sa fonction garantissait l'ordre cosmique, la « Maât », équilibre entre vérité, justice et harmonie. Autour de lui gravitaient prêtres, scribes et fonctionnaires qui administraient un État remarquablement organisé.",
+      "L'écriture y jouait un rôle central. Les hiéroglyphes, longtemps indéchiffrables, combinaient des signes représentant des sons et d'autres des idées. Leur secret n'a été percé qu'au XIXe siècle par Champollion, grâce à la pierre de Rosette, qui portait le même texte en plusieurs écritures. Toute une civilisation a alors pu se remettre à parler.",
+      "La religion imprégnait chaque aspect de la vie, notamment le rapport à la mort. Les Égyptiens croyaient en une vie après la mort, à condition de préserver le corps : d'où la momification, et les tombes remplies d'objets pour accompagner le défunt. Les pyramides, tombeaux monumentaux des premiers pharaons, témoignent de cette obsession de l'éternité.",
+      "Les prouesses techniques de cette société sans machines modernes fascinent encore. Bâtir la grande pyramide de Gizeh, aligner des monuments sur les astres, organiser le travail de milliers d'hommes : tout cela supposait des connaissances avancées en mathématiques, en astronomie et en organisation. L'Égypte antique reste un sommet de l'ingéniosité humaine.",
+      "Absorbée finalement par l'Empire romain, la civilisation pharaonique n'a jamais cessé de fasciner. Ses monuments, ses mystères et son art continuent d'inspirer, rappelant qu'une société humaine a su, pendant trois millénaires, conjuguer stabilité, spiritualité et grandeur.",
+      "Cette civilisation nous a aussi légué des savoirs concrets qui structurent encore nos vies. Les Égyptiens ont développé un calendrier solaire de 365 jours, une géométrie née de la nécessité de redéfinir les champs après chaque crue, et une médecine étonnamment avancée pour l'époque. Leur art, immédiatement reconnaissable à ses figures de profil et ses proportions codifiées, a traversé les millénaires sans presque changer. Étudier l'Égypte, c'est mesurer tout ce que les sociétés suivantes lui doivent.",
+    ],
+    retenir:
+      "L'Égypte antique a duré près de 3000 ans, portée par les crues fertiles du Nil. Dirigée par le pharaon, roi sacré garant de l'ordre (Maât), elle a laissé hiéroglyphes, pyramides et une maîtrise technique exceptionnelle.",
+    funFact:
+      "Cléopâtre a vécu plus près de nous dans le temps que de la construction de la grande pyramide de Gizeh : environ 2500 ans la séparent de la pyramide, mais seulement 2000 ans nous séparent d'elle.",
+    quiz: [
+      {
+        question: "À quoi l'Égypte antique doit-elle sa prospérité agricole ?",
+        options: ["À la pluie abondante", "Aux crues fertiles du Nil", "À l'irrigation par la mer", "Aux montagnes"],
+        answer: 1,
+        explain: "Le limon déposé chaque année rendait les rives fertiles.",
+      },
+      {
+        question: "Qui a déchiffré les hiéroglyphes au XIXe siècle ?",
+        options: ["Hérodote", "Champollion", "Napoléon", "Cléopâtre"],
+        answer: 1,
+        explain: "Grâce à la pierre de Rosette.",
+      },
+      {
+        question: "Pourquoi les Égyptiens momifiaient-ils les corps ?",
+        options: [
+          "Pour la médecine",
+          "Par croyance en une vie après la mort nécessitant un corps préservé",
+          "Par hygiène",
+          "Sans raison connue",
+        ],
+        answer: 1,
+        explain: "La survie dans l'au-delà exigeait de conserver le corps.",
+      },
+    ],
+  },
+  {
+    id: "revolution-industrielle",
+    title: "La révolution industrielle",
+    category: "histoire",
+    minutes: 5,
+    summary: "Comment la machine à vapeur a transformé le monde plus vite que jamais auparavant.",
+    body: [
+      "Pendant des millénaires, la vie humaine a peu changé dans ses fondements : on produisait à la main, l'énergie venait des muscles, du vent ou de l'eau, et la plupart des gens vivaient de la terre. Puis, à partir de la fin du XVIIIe siècle en Grande-Bretagne, un basculement s'amorce : la révolution industrielle, qui va transformer le monde à une vitesse inédite.",
+      "Au cœur de ce bouleversement, une innovation décisive : la maîtrise d'une nouvelle énergie, celle de la vapeur. En brûlant du charbon pour chauffer de l'eau, la machine à vapeur fournit une force motrice puissante, régulière et transportable. Pour la première fois, la production ne dépend plus des bras ni des caprices du vent : elle peut tourner sans relâche.",
+      "Cette énergie donne naissance à l'usine et à la production de masse. Le travail se concentre dans de grands ateliers mécanisés, où des machines fabriquent en série textiles, puis acier, produits de toutes sortes. La productivité explose, les prix baissent, et des biens autrefois rares deviennent accessibles. L'industrie textile, puis la métallurgie, mènent la marche.",
+      "Les transports connaissent une révolution parallèle. Le chemin de fer et le bateau à vapeur réduisent les distances de façon spectaculaire, permettant d'acheminer matières premières et marchandises à grande échelle. Le monde se met à rétrécir : ce qui prenait des semaines se fait en quelques jours, et les marchés deviennent nationaux puis mondiaux.",
+      "Les conséquences sociales sont immenses et ambivalentes. Des campagnes se vident vers des villes qui grossissent démesurément. Une nouvelle classe ouvrière apparaît, travaillant de longues heures dans des conditions souvent dures, y compris des enfants. En face, une bourgeoisie d'industriels s'enrichit. De ces tensions naîtront les grands mouvements sociaux et politiques du XIXe siècle.",
+      "La révolution industrielle a aussi un revers écologique, que l'on mesure surtout aujourd'hui. En fondant la prospérité sur la combustion massive du charbon puis du pétrole, elle a lancé l'ère des énergies fossiles — et, avec elle, l'augmentation des gaz à effet de serre à l'origine du réchauffement actuel.",
+      "En quelques générations, cette transformation a plus changé la vie quotidienne que les millénaires précédents. Elle a fait naître le monde moderne, avec ses progrès matériels spectaculaires et ses défis — inégalités, urbanisation, environnement — que nous continuons d'affronter.",
+      "Ce basculement s'est ensuite diffusé par vagues successives à travec le monde, transformant tour à tour chaque région qu'il touchait. Il a aussi profondément modifié le rapport au temps : l'horloge de l'usine, avec ses horaires stricts, a remplacé le rythme des saisons qui réglait la vie paysanne depuis toujours. Cette discipline nouvelle, la production en série et la consommation de masse qui suivit ont façonné jusqu'à notre façon de vivre, de travailler et de mesurer nos journées.",
+    ],
+    retenir:
+      "La révolution industrielle (fin XVIIIe s., Grande-Bretagne) repose sur la vapeur et le charbon : usines, production de masse, chemin de fer. Elle crée le monde moderne, avec ses progrès, ses inégalités et son empreinte écologique.",
+    funFact:
+      "C'est la révolution industrielle qui a lancé l'ère des énergies fossiles : le réchauffement climatique actuel a commencé, en quelque sorte, avec les premières machines à vapeur.",
+    quiz: [
+      {
+        question: "Quelle énergie est au cœur de la révolution industrielle ?",
+        options: ["Le vent", "La vapeur produite par le charbon", "Le solaire", "L'énergie musculaire"],
+        answer: 1,
+        explain: "La machine à vapeur fournit une force motrice constante.",
+      },
+      {
+        question: "Quelle invention a bouleversé les transports ?",
+        options: ["L'avion", "Le chemin de fer", "La voiture électrique", "La montgolfière"],
+        answer: 1,
+        explain: "Le train et le bateau à vapeur ont réduit les distances.",
+      },
+      {
+        question: "Quel groupe social nouveau apparaît alors ?",
+        options: ["La noblesse", "La classe ouvrière", "Le clergé", "Les paysans libres"],
+        answer: 1,
+        explain: "Elle travaille dans les usines, souvent dans des conditions dures.",
+      },
+    ],
+  },
+  {
+    id: "arme-nucleaire",
+    title: "L'arme nucléaire et la dissuasion",
+    category: "geopolitique",
+    minutes: 5,
+    summary: "Comment une arme faite pour ne jamais servir façonne l'ordre mondial.",
+    body: [
+      "En 1945, l'explosion des premières bombes atomiques change à jamais la nature de la guerre. Pour la première fois, l'humanité dispose d'une arme capable de détruire une ville entière en un instant, et bientôt de menacer la civilisation elle-même. Depuis, l'arme nucléaire n'a plus jamais été employée dans un conflit — et c'est précisément là son paradoxe.",
+      "Sa puissance est d'un autre ordre que les armes classiques. Elle ne détruit pas seulement par le souffle et la chaleur, mais laisse des radiations durables et pourrait, si elle était employée massivement, dérégler le climat de la planète. Cette capacité de destruction totale a transformé la logique même de la guerre entre grandes puissances.",
+      "De là naît le concept de dissuasion. L'idée est contre-intuitive : on possède l'arme non pour s'en servir, mais pour que l'adversaire n'ose pas attaquer, sachant qu'il subirait en retour des dégâts inacceptables. Si deux puissances peuvent se détruire mutuellement, aucune n'a intérêt à déclencher les hostilités. On parle de « destruction mutuelle assurée ».",
+      "Cet équilibre de la terreur a, selon beaucoup d'analystes, empêché une troisième guerre mondiale pendant la Guerre froide. Mais il repose sur une hypothèse fragile : la rationalité des dirigeants et l'absence d'accident. L'histoire a connu plusieurs fausses alertes où une erreur technique ou humaine a failli déclencher l'irréparable.",
+      "Pour limiter les risques, les États ont cherché à encadrer ces armes. Le traité de non-prolifération vise à empêcher leur diffusion à de nouveaux pays, tandis que d'autres accords réduisent les arsenaux. Mais aujourd'hui, neuf États en possèdent, et la crainte qu'elles tombent entre de mauvaises mains, ou que la course reprenne, demeure vive.",
+      "L'arme nucléaire pose une question morale et stratégique unique. Elle confère à ceux qui la détiennent un statut particulier et une forme d'immunité, mais fait peser sur tous une menace existentielle. La posséder protège-t-il vraiment, ou nourrit-il une spirale dangereuse ? Le débat traverse toute la géopolitique contemporaine.",
+      "Comprendre la dissuasion, c'est saisir un des paradoxes les plus troublants de notre époque : une arme dont l'utilité supposée réside dans le fait de ne jamais être utilisée, et dont l'existence même redéfinit les rapports de force entre nations.",
+      "Cette réalité pèse aussi sur les citoyens ordinaires, souvent sans qu'ils y pensent. Des milliers d'armes restent aujourd'hui prêtes à l'emploi, et les décisions les concernant échappent presque entièrement au débat public, concentrées entre les mains de quelques dirigeants. C'est l'un des paradoxes de la démocratie contemporaine : la survie collective repose sur des choix pris dans le secret, à une vitesse qui laisse peu de place à la délibération. La question du désarmement, elle, demeure ouverte et âprement discutée.",
+    ],
+    retenir:
+      "L'arme nucléaire, jamais réutilisée depuis 1945, fonde la « dissuasion » : on la possède pour empêcher l'adversaire d'attaquer, sous peine de destruction mutuelle. Un équilibre de la terreur puissant mais fragile.",
+    funFact:
+      "Pendant la Guerre froide, plusieurs fausses alertes — un vol d'oiseaux pris pour des missiles, un bug informatique — ont failli déclencher une riposte nucléaire, évitée de justesse par le sang-froid d'un opérateur.",
+    quiz: [
+      {
+        question: "Quel est le principe de la dissuasion nucléaire ?",
+        options: [
+          "Utiliser l'arme le plus vite possible",
+          "Posséder l'arme pour que l'adversaire n'ose pas attaquer",
+          "Vendre l'arme à tous",
+          "Détruire ses propres armes",
+        ],
+        answer: 1,
+        explain: "La menace de riposte décourage l'attaque.",
+      },
+      {
+        question: "Que signifie « destruction mutuelle assurée » ?",
+        options: [
+          "Une seule partie serait détruite",
+          "Deux puissances pouvant se détruire l'une l'autre n'ont pas intérêt à attaquer",
+          "Personne ne peut être touché",
+          "La fin des armées",
+        ],
+        answer: 1,
+        explain: "C'est le cœur de l'équilibre de la terreur.",
+      },
+      {
+        question: "Que vise le traité de non-prolifération ?",
+        options: [
+          "Empêcher la diffusion de l'arme à de nouveaux pays",
+          "Augmenter les arsenaux",
+          "Interdire l'électricité nucléaire",
+          "Vendre des bombes",
+        ],
+        answer: 0,
+        explain: "Limiter le nombre d'États dotés.",
+      },
+    ],
+  },
+  {
+    id: "migrations",
+    title: "Les migrations internationales",
+    category: "geopolitique",
+    minutes: 5,
+    summary: "Un phénomène aussi vieux que l'humanité, au cœur des débats d'aujourd'hui.",
+    body: [
+      "Les êtres humains se déplacent depuis toujours. Notre espèce elle-même est née du mouvement, peuplant la planète par vagues successives. Migrer — quitter son lieu de vie pour s'installer ailleurs — n'a donc rien d'exceptionnel. Pourtant, les migrations sont devenues l'un des sujets les plus sensibles et les plus débattus de la politique contemporaine.",
+      "Il faut d'abord distinguer des réalités très différentes que l'on confond souvent. Un migrant économique cherche de meilleures conditions de vie ; un réfugié fuit des persécutions ou une guerre et bénéficie d'une protection prévue par le droit international ; un déplacé se réfugie ailleurs dans son propre pays. Ces situations relèvent de règles et d'enjeux distincts.",
+      "Contrairement à une idée répandue, la majorité des migrations se font à l'intérieur des régions du monde, souvent entre pays voisins, et non des pays pauvres vers les pays riches. Beaucoup de personnes déplacées restent à proximité de chez elles. Les grandes migrations lointaines, très médiatisées, ne représentent qu'une part du phénomène.",
+      "Les causes sont multiples et souvent combinées. La recherche de travail, les conflits, les persécutions politiques, mais aussi, de plus en plus, les dégradations de l'environnement : sécheresses, montée des eaux, catastrophes. Le changement climatique pourrait, dans les décennies à venir, devenir un moteur majeur de déplacements humains.",
+      "Les migrations ont des effets économiques réels, généralement positifs à long terme. Les migrants comblent des besoins de main-d'œuvre, créent de l'activité, et envoient à leurs familles restées au pays des sommes considérables, souvent supérieures à l'aide au développement. Mais elles posent aussi des défis d'intégration, de services publics et de cohésion sociale.",
+      "Le sujet est si sensible parce qu'il touche à des questions profondes : l'identité, la souveraineté des frontières, la solidarité, la peur de l'autre. Il oppose des impératifs difficiles à concilier — accueil et contrôle, ouverture et cohésion — ce qui en fait un terrain de tensions politiques dans de nombreux pays.",
+      "Comprendre les migrations suppose de dépasser les images simplistes pour saisir un phénomène complexe, ancien et durable. Loin d'être une anomalie, la mobilité humaine est une constante de notre histoire, que les sociétés doivent apprendre à gérer avec lucidité plutôt qu'avec peur.",
+      "Il est également utile de rappeler que la plupart des sociétés d'aujourd'hui se sont construites par des apports successifs de populations. Les cultures, les langues et les cuisines que nous croyons « pures » sont presque toujours le fruit de métissages anciens. Regarder les migrations avec cette profondeur historique aide à dépasser l'idée d'une identité figée, menacée par l'extérieur. Les sociétés qui ont su intégrer les nouveaux venus en ont souvent tiré dynamisme, créativité et renouvellement.",
+    ],
+    retenir:
+      "Migrer est une constante de l'histoire humaine. Il faut distinguer migrants économiques, réfugiés et déplacés. La plupart des migrations sont régionales ; le climat en devient un moteur croissant. Un sujet aux effets réels et aux fortes tensions politiques.",
+    funFact:
+      "Les sommes envoyées par les migrants à leurs familles (les « transferts de fonds ») dépassent largement, chaque année, le total de l'aide publique au développement versée par les pays riches.",
+    quiz: [
+      {
+        question: "Quelle différence entre un migrant économique et un réfugié ?",
+        options: [
+          "Aucune",
+          "Le réfugié fuit des persécutions ou une guerre et a une protection légale",
+          "Le migrant économique est toujours illégal",
+          "Le réfugié cherche du travail",
+        ],
+        answer: 1,
+        explain: "Le statut de réfugié relève du droit international.",
+      },
+      {
+        question: "Où se font la plupart des migrations ?",
+        options: [
+          "Toujours des pays pauvres vers les pays riches",
+          "Souvent au sein d'une même région, entre pays voisins",
+          "Uniquement par avion",
+          "Vers l'espace",
+        ],
+        answer: 1,
+        explain: "Les grandes migrations lointaines ne sont qu'une part du phénomène.",
+      },
+      {
+        question: "Quel facteur pourrait fortement accroître les migrations futures ?",
+        options: ["Le changement climatique", "La baisse des prix", "Le sport", "Internet"],
+        answer: 0,
+        explain: "Sécheresses, montée des eaux et catastrophes déplacent des populations.",
+      },
+    ],
+  },
+  {
+    id: "trous-noirs",
+    title: "Les trous noirs",
+    category: "sciences",
+    minutes: 5,
+    summary: "Des objets si denses que même la lumière ne peut s'en échapper.",
+    body: [
+      "Peu d'objets fascinent autant que les trous noirs. Longtemps considérés comme de simples curiosités théoriques, ils sont aujourd'hui observés dans tout l'univers. Un trou noir est une région de l'espace où la matière est si concentrée que rien, pas même la lumière, ne peut en sortir. D'où son nom : il n'émet aucune lumière, il est « noir ».",
+      "Pour comprendre, il faut penser à la gravité comme à une déformation de l'espace, selon Einstein. Plus un objet est massif et compact, plus il creuse profondément cet espace autour de lui. Concentrez assez de matière dans un volume assez petit, et le creux devient un puits sans fond : la vitesse nécessaire pour s'en échapper dépasse celle de la lumière, or rien ne va plus vite.",
+      "La frontière de ce puits s'appelle l'horizon des événements. C'est un point de non-retour : tout ce qui le franchit, matière ou lumière, est irrémédiablement piégé. De l'extérieur, on ne peut donc jamais voir ce qui se passe à l'intérieur. Cet horizon n'est pas une surface solide, mais une limite invisible dans l'espace.",
+      "D'où viennent les trous noirs ? Beaucoup naissent de la mort d'étoiles très massives. En fin de vie, privée de carburant, une telle étoile s'effondre sur elle-même sous sa propre gravité, comprimant sa matière à l'extrême. Il existe aussi des trous noirs « supermassifs », des millions à des milliards de fois plus lourds que le Soleil, tapis au centre des galaxies.",
+      "Comment observer l'invisible ? Justement par ses effets. Un trou noir trahit sa présence en déformant la lumière des astres derrière lui, en faisant tourner à toute vitesse la matière qui l'entoure, ou en avalant du gaz qui chauffe et brille intensément avant de disparaître. En 2019, on a même obtenu la première « image » de l'environnement d'un trou noir.",
+      "Les trous noirs restent des laboratoires extrêmes pour la physique. En leur cœur, les lois connues semblent atteindre leurs limites, là où la relativité d'Einstein et la physique quantique devraient se rejoindre — sans qu'on sache encore comment. Ils sont ainsi à la frontière de ce que nous comprenons de l'univers.",
+      "Loin des clichés de « tunnels » vers d'autres mondes, les trous noirs sont des objets bien réels, prédits par la théorie et confirmés par l'observation. Ils rappellent que le cosmos abrite des phénomènes qui défient l'intuition, et que la science avance en explorant précisément ces extrêmes.",
+    ],
+    retenir:
+      "Un trou noir concentre tant de matière que rien, pas même la lumière, ne peut franchir sa frontière (l'horizon des événements). Beaucoup naissent de l'effondrement d'étoiles massives ; on les détecte par leurs effets sur leur entourage.",
+    funFact:
+      "On ne peut pas voir un trou noir directement, mais en 2019 les scientifiques ont obtenu la première image de la matière brillante tourbillonnant juste autour de l'un d'eux.",
+    quiz: [
+      {
+        question: "Pourquoi un trou noir est-il « noir » ?",
+        options: [
+          "Il est peint en noir",
+          "Même la lumière ne peut s'en échapper",
+          "Il absorbe les couleurs",
+          "Il est trop loin",
+        ],
+        answer: 1,
+        explain: "Aucune lumière n'en sort, il n'émet donc rien.",
+      },
+      {
+        question: "Comment appelle-t-on la frontière d'un trou noir ?",
+        options: ["L'horizon des événements", "L'équateur", "La photosphère", "Le méridien"],
+        answer: 0,
+        explain: "C'est le point de non-retour.",
+      },
+      {
+        question: "Comment beaucoup de trous noirs se forment-ils ?",
+        options: [
+          "Par l'effondrement d'étoiles très massives en fin de vie",
+          "Par la collision de planètes",
+          "Par une éruption solaire",
+          "Ils ont toujours existé identiques",
+        ],
+        answer: 0,
+        explain: "L'étoile s'effondre sous sa propre gravité.",
+      },
+    ],
+  },
+  {
+    id: "cerveau",
+    title: "Le cerveau humain",
+    category: "sciences",
+    minutes: 5,
+    summary: "Trois livres de matière qui produisent la pensée, les émotions et la conscience.",
+    body: [
+      "À l'intérieur de votre crâne se trouve l'objet le plus complexe connu dans l'univers : le cerveau humain. Pesant environ un kilogramme et demi, cette masse gélatineuse produit tout ce qui fait notre vie mentale — nos pensées, nos souvenirs, nos émotions, notre conscience. Comprendre comment il fonctionne est l'un des plus grands défis de la science.",
+      "Le cerveau est fait de cellules spécialisées, les neurones, au nombre d'environ quatre-vingt-six milliards. Chaque neurone communique avec des milliers d'autres par des connexions appelées synapses, formant un réseau d'une densité vertigineuse. L'information y circule sous forme de signaux électriques et chimiques, à grande vitesse.",
+      "Ce qui compte, ce n'est pas tant chaque neurone isolé que les connexions entre eux. La pensée, la mémoire, l'apprentissage naissent de l'activité coordonnée de vastes réseaux de neurones. Apprendre quelque chose, c'est littéralement modifier ces connexions : renforcer certaines, en créer de nouvelles. Le cerveau se remodèle en permanence, une propriété appelée plasticité.",
+      "Différentes régions se spécialisent dans différentes fonctions : la vision, le langage, le mouvement, les émotions. Mais aucune ne travaille seule ; les fonctions complexes résultent de la coopération de multiples zones. Cette organisation, à la fois spécialisée et interconnectée, permet une flexibilité remarquable, y compris pour récupérer après une lésion.",
+      "Le cerveau est aussi un organe étonnamment économe et paresseux. Bien qu'il ne représente que 2 % de notre poids, il consomme environ 20 % de notre énergie. Pour économiser, il prend sans cesse des raccourcis, se fie à des habitudes et à des automatismes. Ces raccourcis, très utiles, expliquent aussi nos nombreux biais et illusions.",
+      "L'un des plus grands mystères reste la conscience : comment de la matière peut-elle produire une expérience subjective, le sentiment d'être « soi » ? Malgré des progrès considérables, la science ne l'explique pas encore pleinement. Le cerveau reste, en un sens, l'organe qui cherche à se comprendre lui-même.",
+      "Loin d'être figé, notre cerveau change tout au long de la vie, façonné par nos expériences, nos apprentissages, notre sommeil et notre environnement. En prendre soin — apprendre, dormir, bouger, tisser des liens — n'est pas un luxe : c'est entretenir l'organe qui fait de nous ce que nous sommes.",
+      "Cette complexité explique aussi pourquoi tant de mythes circulent à son sujet. Non, nous n'utilisons pas seulement 10 % de notre cerveau : la quasi-totalité est active au cours d'une journée. Et non, il n'existe pas vraiment de « cerveau gauche rationnel » opposé à un « cerveau droit créatif » : les fonctions sont réparties, mais les deux hémisphères coopèrent en permanence. Se méfier de ces idées reçues fait partie d'une bonne compréhension de cet organe fascinant.",
+    ],
+    retenir:
+      "Le cerveau, avec ses ~86 milliards de neurones connectés par des synapses, produit pensées, mémoire et émotions. La pensée naît des réseaux, non des neurones isolés ; il se remodèle en permanence (plasticité). La conscience reste un mystère.",
+    funFact:
+      "Le cerveau ne représente que 2 % de notre poids mais consomme environ 20 % de notre énergie : penser, c'est l'une des activités les plus « énergivores » du corps.",
+    quiz: [
+      {
+        question: "Qu'est-ce qui produit la pensée dans le cerveau ?",
+        options: [
+          "Un seul neurone",
+          "L'activité coordonnée de réseaux de neurones connectés",
+          "Le liquide céphalo-rachidien",
+          "Les os du crâne",
+        ],
+        answer: 1,
+        explain: "Ce sont les connexions entre neurones qui comptent.",
+      },
+      {
+        question: "Qu'est-ce que la plasticité cérébrale ?",
+        options: [
+          "La rigidité du cerveau",
+          "Sa capacité à se remodeler en modifiant ses connexions",
+          "Sa couleur",
+          "Un plastique qui l'entoure",
+        ],
+        answer: 1,
+        explain: "Apprendre, c'est modifier les connexions neuronales.",
+      },
+      {
+        question: "Quelle part de notre énergie le cerveau consomme-t-il ?",
+        options: ["2 %", "Environ 20 %", "50 %", "80 %"],
+        answer: 1,
+        explain: "Pour seulement 2 % du poids du corps.",
+      },
+    ],
+  },
+  {
+    id: "dette-publique",
+    title: "La dette publique",
+    category: "economie",
+    minutes: 5,
+    summary: "Pourquoi les États empruntent, et quand cela devient un problème.",
+    body: [
+      "« La dette de l'État atteint des sommets ! » Ce genre de titre revient régulièrement, souvent teinté d'alarme. Mais qu'est-ce au juste que la dette publique, pourquoi les États empruntent-ils, et à partir de quand faut-il s'inquiéter ? Le sujet, technique en apparence, est en réalité central pour comprendre la vie économique et politique.",
+      "Comme un ménage ou une entreprise, un État dépense et perçoit des recettes, principalement les impôts. Quand ses dépenses dépassent ses recettes, il est en déficit et doit emprunter pour combler la différence. La dette publique est simplement l'accumulation, année après année, de ces emprunts non encore remboursés.",
+      "Emprunter n'est pas mauvais en soi. Un État peut le faire pour investir dans l'avenir — écoles, hôpitaux, infrastructures — dont bénéficieront les générations suivantes, qui participeront au remboursement. En période de crise, la dette permet aussi de soutenir l'économie, en dépensant quand les entreprises et les ménages, eux, se restreignent.",
+      "Pour juger si une dette est soutenable, on la rapporte à la richesse produite par le pays, le PIB. Un même montant ne pèse pas de la même façon selon la taille de l'économie. Ce qui compte n'est pas tant le niveau absolu que la capacité à rembourser et, surtout, à payer les intérêts sans étouffer le reste des dépenses.",
+      "Le vrai risque apparaît quand les prêteurs doutent de cette capacité. Ils exigent alors des taux d'intérêt plus élevés pour continuer à prêter, ce qui alourdit la charge et peut enclencher un cercle vicieux. Dans les cas extrêmes, un État peut se retrouver incapable de se financer, provoquant une crise de la dette aux conséquences sociales lourdes.",
+      "La dette publique est donc un outil à double tranchant, ni bon ni mauvais en soi. Bien utilisée, elle finance l'avenir et amortit les chocs ; mal maîtrisée, elle peut fragiliser un pays et réduire ses marges de manœuvre futures. Tout est affaire de mesure, d'usage et de confiance.",
+      "Derrière les chiffres se cache finalement un choix de société : que finance-t-on, qui rembourse, et comment répartir l'effort entre les générations ? La dette n'est pas qu'une question comptable : c'est un enjeu profondément politique.",
+      "Il faut aussi distinguer la dette d'un État de celle d'un ménage, comparaison trompeuse mais fréquente. Contrairement à un particulier, un État ne disparaît pas et n'est pas obligé de tout rembourser d'un coup : il renouvelle sa dette en empruntant à nouveau, et peut, dans certaines limites, compter sur la croissance et sa banque centrale. Cela ne rend pas la dette anodine, mais invite à raisonner autrement que sur le budget d'un foyer.",
+    ],
+    retenir:
+      "La dette publique est l'accumulation des emprunts d'un État en déficit. Elle n'est pas mauvaise en soi (investir, amortir les crises) ; le risque vient quand les prêteurs doutent du remboursement et exigent des taux élevés. On la juge rapportée au PIB.",
+    funFact:
+      "Ce qui compte n'est pas tant le montant de la dette que le coût de ses intérêts : un État peut vivre avec une dette élevée tant que les taux restent bas et la confiance intacte.",
+    quiz: [
+      {
+        question: "Qu'est-ce que la dette publique ?",
+        options: [
+          "Les impôts d'une année",
+          "L'accumulation des emprunts d'un État en déficit",
+          "L'argent des ménages",
+          "Le budget de la défense",
+        ],
+        answer: 1,
+        explain: "Elle s'additionne au fil des déficits annuels.",
+      },
+      {
+        question: "Pourquoi rapporter la dette au PIB ?",
+        options: [
+          "Par tradition",
+          "Pour mesurer son poids relatif à la richesse du pays",
+          "Pour la cacher",
+          "Cela ne sert à rien",
+        ],
+        answer: 1,
+        explain: "Un même montant pèse différemment selon la taille de l'économie.",
+      },
+      {
+        question: "Quand la dette devient-elle vraiment dangereuse ?",
+        options: [
+          "Quand les prêteurs doutent et exigent des taux élevés",
+          "Dès qu'elle existe",
+          "Quand elle finance des écoles",
+          "Jamais",
+        ],
+        answer: 0,
+        explain: "Cela peut enclencher un cercle vicieux.",
+      },
+    ],
+  },
+  {
+    id: "crises-financieres",
+    title: "Les crises financières",
+    category: "economie",
+    minutes: 5,
+    summary: "Pourquoi l'économie connaît régulièrement des emballements suivis de krachs.",
+    body: [
+      "L'histoire économique est ponctuée de crises : des moments où la machine se grippe brutalement, où des fortunes s'évaporent, où le chômage explose. De la tulipe hollandaise du XVIIe siècle à la crise de 2008, ces épisodes se ressemblent étrangement. Comprendre leur mécanique aide à ne pas les subir en spectateur naïf.",
+      "Beaucoup de crises commencent par une « bulle ». Le prix d'un actif — actions, logements, tulipes — se met à grimper. Attirés par les gains, de plus en plus d'acheteurs se précipitent, faisant encore monter les prix. Chacun achète non pour la valeur réelle du bien, mais parce qu'il espère revendre plus cher. L'euphorie l'emporte sur la raison.",
+      "Cet emballement se nourrit souvent du crédit. On emprunte pour investir, persuadé que les prix continueront de monter. Tant que la hausse dure, tout va bien. Mais cette dette rend le système fragile : le jour où les prix cessent de grimper, l'édifice vacille. La confiance, qui gonflait la bulle, peut se retourner d'un coup.",
+      "Vient alors le retournement. Quelques acteurs vendent, les prix baissent, la peur remplace l'avidité. Chacun cherche à vendre avant les autres, ce qui accélère la chute : c'est le krach. Ceux qui avaient emprunté ne peuvent plus rembourser, des banques sont menacées, et le crédit se bloque, paralysant toute l'économie.",
+      "Le plus grave est la contagion. Dans un système financier interconnecté, la chute d'un acteur peut en entraîner d'autres, comme des dominos. La crise de 2008, partie de crédits immobiliers américains risqués, s'est ainsi propagée au monde entier, provoquant une récession mondiale et obligeant les États à sauver des banques.",
+      "Ces crises ne sont pas de simples accidents : elles révèlent une tendance récurrente des marchés à l'excès, oscillant entre euphorie et panique. C'est pourquoi on cherche à les prévenir par la régulation — encadrer le crédit, surveiller les banques, limiter les prises de risque — sans jamais y parvenir totalement.",
+      "Comprendre les crises financières, c'est accepter une part d'irrationnel dans l'économie. Derrière les chiffres, il y a des émotions humaines — la peur et l'avidité — qui, amplifiées par la finance, produisent ces cycles d'emballement et d'effondrement vieux comme le commerce lui-même.",
+      "Fait rassurant, les leçons du passé n'ont pas été totalement perdues. Après chaque grande crise, les États et les banques centrales ont appris à réagir plus vite pour éviter l'effondrement complet : garantir les dépôts, injecter des liquidités, soutenir l'activité. Ces filets de sécurité ont un coût et posent leurs propres problèmes, mais ils ont souvent permis d'amortir des chocs qui, un siècle plus tôt, auraient pu tourner à la catastrophe généralisée.",
+    ],
+    retenir:
+      "Beaucoup de crises naissent d'une bulle : les prix s'envolent, gonflés par le crédit et l'euphorie, jusqu'au retournement (krach) et à la contagion. Elles révèlent la tendance des marchés à l'excès, entre avidité et panique.",
+    funFact:
+      "L'une des premières bulles spéculatives connues concernait… des bulbes de tulipes, dans la Hollande des années 1630, où un seul bulbe rare pouvait valoir le prix d'une maison.",
+    quiz: [
+      {
+        question: "Qu'est-ce qu'une bulle spéculative ?",
+        options: [
+          "Une baisse générale des prix",
+          "Une hausse des prix nourrie par l'espoir de revendre plus cher",
+          "Une taxe nouvelle",
+          "Une panne bancaire",
+        ],
+        answer: 1,
+        explain: "On achète pour spéculer, pas pour la valeur réelle.",
+      },
+      {
+        question: "Qu'est-ce qui rend le système fragile pendant une bulle ?",
+        options: ["L'épargne", "Le crédit et l'endettement", "Les impôts", "La monnaie liquide"],
+        answer: 1,
+        explain: "La dette amplifie la chute au moindre retournement.",
+      },
+      {
+        question: "Qu'a montré la crise de 2008 ?",
+        options: [
+          "La contagion mondiale d'une crise partie des crédits immobiliers américains",
+          "Que les crises sont impossibles",
+          "La fin de la finance",
+          "Un simple incident local",
+        ],
+        answer: 0,
+        explain: "L'interconnexion a propagé la crise au monde entier.",
+      },
+    ],
+  },
+  {
+    id: "epicurisme",
+    title: "Épicure et le bonheur",
+    category: "philosophie",
+    minutes: 5,
+    summary: "Une philosophie du plaisir souvent mal comprise, en réalité pleine de sagesse.",
+    body: [
+      "Le mot « épicurien » évoque aujourd'hui l'amateur de bonne chère et de plaisirs raffinés. C'est un contresens presque total. Épicure, philosophe grec du IVe siècle avant notre ère, prônait au contraire une vie simple et mesurée. Sa doctrine, l'épicurisme, est une réflexion profonde sur ce qu'est vraiment le bonheur.",
+      "Pour Épicure, le but de la vie est bien le plaisir, entendu comme absence de souffrance et tranquillité de l'âme. Mais tous les plaisirs ne se valent pas. Certains, mal choisis, apportent plus de troubles que de satisfaction : l'excès de nourriture rend malade, la soif de richesse ou de gloire engendre une inquiétude sans fin. Le sage doit donc trier ses désirs.",
+      "Épicure propose pour cela une classification célèbre. Il distingue les désirs naturels et nécessaires — manger, boire, se sentir en sécurité —, qu'il faut satisfaire ; les désirs naturels mais non nécessaires, comme les mets délicats, à savourer avec modération ; et les désirs ni naturels ni nécessaires — richesse démesurée, pouvoir, célébrité —, sources de tourments, qu'il vaut mieux écarter.",
+      "Le bonheur, dès lors, ne consiste pas à accumuler toujours plus, mais à se contenter de peu et à apprécier ce que l'on a. Un morceau de pain et de l'eau, savourés dans la sérénité et l'amitié, valent mieux qu'un festin rongé par l'angoisse. Il y a là une leçon d'une étonnante actualité dans nos sociétés de consommation.",
+      "Épicure s'attaque aussi aux grandes peurs qui empoisonnent l'existence, en particulier la peur de la mort. Son raisonnement est célèbre : « La mort n'est rien pour nous, car tant que nous sommes, la mort n'est pas là, et quand la mort est là, nous ne sommes plus. » Il ne sert donc à rien de gâcher sa vie à la redouter.",
+      "L'amitié, enfin, occupe une place centrale dans sa pensée. Épicure vivait entouré de disciples dans un jardin, à l'écart de l'agitation politique. Pour lui, les relations sincères comptent parmi les plus grandes sources de bonheur et de sécurité intérieure.",
+      "L'épicurisme n'est donc pas une invitation à la débauche, mais une sagesse de la mesure : identifier ses vrais besoins, se libérer des désirs vains et des peurs inutiles, cultiver l'amitié. Une recette de sérénité vieille de plus de deux mille ans, qui n'a rien perdu de sa pertinence.",
+      "Cette sagesse trouve un écho particulier aujourd'hui, à l'heure où la publicité et la consommation entretiennent le sentiment qu'il nous manque toujours quelque chose. Épicure inverse le raisonnement : plutôt que de courir après des désirs sans fin, il invite à réduire ses besoins pour atteindre plus sûrement la sérénité. La richesse, disait-il en substance, n'est pas d'avoir beaucoup, mais de désirer peu. Une invitation intemporelle à distinguer l'essentiel du superflu.",
+    ],
+    retenir:
+      "Contrairement au cliché, Épicure prône une vie simple. Le bonheur est l'absence de trouble : trier ses désirs (naturels/nécessaires ou vains), se libérer des peurs (dont celle de la mort) et cultiver l'amitié.",
+    funFact:
+      "Épicure enseignait dans un jardin plutôt que sur une place publique, d'où le nom de son école : « le Jardin ». Il y accueillait, fait rare pour l'époque, des femmes et des esclaves.",
+    quiz: [
+      {
+        question: "Que prône réellement l'épicurisme ?",
+        options: [
+          "La débauche et le luxe",
+          "Une vie simple et mesurée, sans troubles",
+          "Le renoncement à tout plaisir",
+          "La quête de la richesse",
+        ],
+        answer: 1,
+        explain: "Le bonheur vient de l'absence de souffrance et de désirs vains.",
+      },
+      {
+        question: "Quels désirs Épicure conseille-t-il d'écarter ?",
+        options: [
+          "Les désirs naturels et nécessaires",
+          "Les désirs ni naturels ni nécessaires (gloire, richesse démesurée)",
+          "Le besoin de manger",
+          "L'amitié",
+        ],
+        answer: 1,
+        explain: "Ils sont sources de tourments sans fin.",
+      },
+      {
+        question: "Que dit Épicure de la peur de la mort ?",
+        options: [
+          "Il faut la cultiver",
+          "Elle est vaine : quand la mort est là, nous ne sommes plus",
+          "C'est le sens de la vie",
+          "Elle rend heureux",
+        ],
+        answer: 1,
+        explain: "Inutile de gâcher sa vie à la redouter.",
+      },
+    ],
+  },
+  {
+    id: "contrat-social",
+    title: "Le contrat social",
+    category: "philosophie",
+    minutes: 5,
+    summary: "Pourquoi acceptons-nous d'obéir à des lois ? Une idée qui fonde la politique moderne.",
+    body: [
+      "Pourquoi obéissons-nous à l'État, aux lois, à une autorité ? Qu'est-ce qui rend un pouvoir légitime ? À ces questions fondamentales, des philosophes des XVIIe et XVIIIe siècles ont apporté une réponse commune et révolutionnaire : l'idée de contrat social. Une sorte d'accord, réel ou imaginaire, par lequel les humains fondent la société.",
+      "L'expérience de pensée est la suivante : imaginons les hommes avant toute société, dans un « état de nature ». Comment y vit-on, et pourquoi accepterait-on d'en sortir pour se soumettre à des règles communes ? Selon la réponse, on obtient une vision très différente du pouvoir légitime. Trois penseurs incarnent trois réponses majeures.",
+      "Pour Thomas Hobbes, l'état de nature est une guerre de tous contre tous, où la vie est « solitaire, misérable et brève ». Par peur de cette violence, les hommes acceptent de renoncer à leur liberté au profit d'un pouvoir fort, capable de garantir la paix et la sécurité. Le contrat justifie ici un État puissant, presque absolu.",
+      "John Locke propose une vision plus optimiste. L'état de nature n'est pas si terrible, mais incertain, car chacun est juge dans sa propre cause. Les hommes s'associent pour mieux protéger des droits naturels qu'ils possèdent déjà : la vie, la liberté, la propriété. Si le pouvoir viole ces droits, le peuple est fondé à lui résister. Voici les bases du libéralisme.",
+      "Jean-Jacques Rousseau, enfin, donne au contrat un tour démocratique. Pour lui, les hommes s'associent pour obéir non à un maître, mais à une loi qu'ils se donnent eux-mêmes, exprimant la « volonté générale ». La liberté ne consiste pas à faire ce qu'on veut, mais à obéir à des règles dont on est soi-même l'auteur. C'est le fondement de la souveraineté populaire.",
+      "Ces théories ont eu une portée immense. Elles ont déplacé la source du pouvoir : celui-ci ne vient plus de Dieu ni de la naissance, mais du consentement des gouvernés. Les révolutions américaine et française, les déclarations de droits, la démocratie moderne puisent directement dans cette idée.",
+      "Le contrat social reste une fiction éclairante plus qu'un événement historique. Mais il pose la bonne question, toujours actuelle : à quelles conditions un pouvoir mérite-t-il notre obéissance ? Y répondre, c'est réfléchir aux fondements mêmes de la vie en commun.",
+      "Ces théories ne s'accordent pas sur tout, et c'est justement ce qui les rend fécondes. Selon qu'on imagine l'homme naturellement dangereux, raisonnable ou bon, on aboutit à des régimes très différents — autoritaire, libéral ou démocratique. Les débats politiques d'aujourd'hui, sur l'équilibre entre sécurité et liberté ou entre l'individu et la collectivité, rejouent en réalité, souvent sans le savoir, ces vieilles disputes sur ce qu'est un pouvoir légitime.",
+    ],
+    retenir:
+      "Le contrat social explique la légitimité du pouvoir par un accord entre les humains. Hobbes y justifie un État fort (sécurité), Locke la protection des droits (libéralisme), Rousseau la volonté générale (démocratie). Le pouvoir vient du consentement des gouvernés.",
+    funFact:
+      "« L'homme est né libre, et partout il est dans les fers » : cette phrase choc qui ouvre « Du contrat social » de Rousseau est devenue l'une des plus célèbres de la philosophie politique.",
+    quiz: [
+      {
+        question: "Que cherche à expliquer le contrat social ?",
+        options: [
+          "L'origine de l'univers",
+          "La légitimité du pouvoir et pourquoi on obéit aux lois",
+          "Le fonctionnement de l'économie",
+          "Les lois de la physique",
+        ],
+        answer: 1,
+        explain: "Un accord fondant la vie en société.",
+      },
+      {
+        question: "Selon Hobbes, pourquoi les hommes quittent-ils l'état de nature ?",
+        options: [
+          "Par ennui",
+          "Par peur de la guerre de tous contre tous, pour la sécurité",
+          "Pour s'enrichir",
+          "Par hasard",
+        ],
+        answer: 1,
+        explain: "Il justifie ainsi un pouvoir fort garantissant la paix.",
+      },
+      {
+        question: "Qu'est-ce que la « volonté générale » chez Rousseau ?",
+        options: [
+          "La loi qu'un peuple se donne à lui-même",
+          "La volonté du roi",
+          "Le hasard",
+          "L'avis d'un seul sage",
+        ],
+        answer: 0,
+        explain: "Obéir à une loi dont on est l'auteur, base de la souveraineté populaire.",
+      },
+    ],
+  },
+  {
+    id: "cathedrales-gothiques",
+    title: "Les cathédrales gothiques",
+    category: "arts",
+    minutes: 5,
+    summary: "Comment le Moyen Âge a fait tenir la pierre dans le ciel et entrer la lumière.",
+    body: [
+      "Levez les yeux dans une cathédrale gothique : les colonnes s'élancent, les voûtes se perdent en hauteur, la lumière colorée ruisselle des vitraux. Ces édifices, construits en Europe à partir du XIIe siècle, comptent parmi les plus audacieux jamais bâtis. Ils traduisent une prouesse technique autant qu'une vision spirituelle du monde.",
+      "Le style précédent, dit roman, produisait des églises massives, aux murs épais et aux petites ouvertures, car les murs devaient porter tout le poids des voûtes. Le gothique va renverser cette logique. Son ambition : construire plus haut, plus léger, plus lumineux. Pour cela, il faut résoudre un problème d'ingénierie redoutable.",
+      "Trois innovations le permettent. La croisée d'ogives concentre le poids de la voûte sur quelques points précis. L'arc brisé, plus vertical, permet de monter plus haut. Et surtout, l'arc-boutant, cet étai extérieur, reprend la poussée des voûtes et la conduit vers le sol, à l'extérieur du bâtiment. Le mur, ainsi déchargé, n'a plus besoin d'être massif.",
+      "La conséquence est spectaculaire : les murs peuvent s'ouvrir. À la place de la pierre pleine apparaissent d'immenses verrières. Le vitrail devient un art majeur, filtrant la lumière en une pluie de couleurs. Pour les hommes du Moyen Âge, cette lumière n'était pas décorative : elle symbolisait la présence divine, faisant de la cathédrale une image du ciel sur terre.",
+      "Ces chantiers étaient des entreprises colossales, s'étalant souvent sur plusieurs générations. Ils mobilisaient des villes entières, des corps de métiers spécialisés — tailleurs de pierre, charpentiers, verriers — et des sommes considérables. Bâtir une cathédrale était un projet collectif, à la fois acte de foi, affirmation de prestige et exploit technique.",
+      "La cathédrale servait aussi de « livre de pierre ». Ses sculptures, ses portails, ses vitraux racontaient des récits religieux à une population en grande partie analphabète. L'architecture, l'image et la lumière se combinaient pour enseigner, émerveiller et élever l'âme.",
+      "Aujourd'hui encore, ces édifices nous impressionnent. Ils témoignent d'une époque capable, avec des moyens rudimentaires, de viser le sublime, et d'inscrire dans la pierre une aspiration à dépasser les limites du possible. Le gothique reste l'un des sommets du génie humain.",
+      "Ces monuments jouaient aussi un rôle bien au-delà du religieux. La cathédrale était le cœur de la cité : on s'y réunissait, on y commerçait sur le parvis, on y célébrait les grands événements. Sa hauteur, visible à des lieues à la ronde, affirmait la richesse et la fierté d'une ville, qui rivalisait parfois avec ses voisines pour bâtir plus haut encore. Certaines de ces audaces ont d'ailleurs coûté cher : quelques voûtes trop ambitieuses se sont effondrées.",
+    ],
+    retenir:
+      "L'art gothique (à partir du XIIe s.) bâtit haut et lumineux grâce à la croisée d'ogives, l'arc brisé et l'arc-boutant, qui déchargent les murs. Ceux-ci s'ouvrent alors aux vitraux, symboles de la lumière divine.",
+    funFact:
+      "L'arc-boutant, ces « béquilles » de pierre à l'extérieur des cathédrales, n'est pas un ornement : c'est lui qui empêche les murs, allégés pour laisser place aux vitraux, de s'écrouler vers l'extérieur.",
+    quiz: [
+      {
+        question: "Quel était le but de l'architecture gothique ?",
+        options: [
+          "Construire massif et sombre",
+          "Construire plus haut, plus léger et plus lumineux",
+          "Supprimer les fenêtres",
+          "Imiter les temples grecs",
+        ],
+        answer: 1,
+        explain: "Elle renverse la logique romane.",
+      },
+      {
+        question: "À quoi sert l'arc-boutant ?",
+        options: [
+          "À décorer la façade",
+          "À reprendre la poussée des voûtes vers le sol à l'extérieur",
+          "À soutenir le toit uniquement",
+          "À rien de structurel",
+        ],
+        answer: 1,
+        explain: "Il décharge les murs, qui peuvent alors s'ouvrir.",
+      },
+      {
+        question: "Que symbolisait la lumière des vitraux ?",
+        options: ["La richesse", "La présence divine", "Le pouvoir royal", "Rien de particulier"],
+        answer: 1,
+        explain: "La cathédrale devenait une image du ciel sur terre.",
+      },
+    ],
+  },
+  {
+    id: "jazz",
+    title: "Le jazz",
+    category: "arts",
+    minutes: 5,
+    summary: "Une musique née de la liberté et de l'improvisation, devenue universelle.",
+    body: [
+      "Au début du XXe siècle, dans le sud des États-Unis et particulièrement à La Nouvelle-Orléans, naît une musique nouvelle : le jazz. Issu des communautés afro-américaines, il puise à des sources multiples — chants de travail, blues, gospel, fanfares — pour donner naissance à un langage musical d'une richesse et d'une liberté inédites.",
+      "Ce qui distingue profondément le jazz, c'est l'improvisation. Là où la musique classique se joue en suivant fidèlement une partition écrite, le musicien de jazz invente en grande partie sa musique sur le moment. À partir d'un thème et d'une grille d'accords communs, chacun développe son propre discours, unique à chaque interprétation. Aucun concert ne ressemble tout à fait à un autre.",
+      "Le jazz repose aussi sur une conception particulière du rythme, le fameux « swing » : une manière souple de placer les notes, légèrement en décalage, qui donne à la musique sa pulsation entraînante et cette sensation de balancement si caractéristique. Difficile à définir, le swing se ressent plus qu'il ne s'explique.",
+      "Le jazz est enfin une musique de dialogue. Sur scène, les musiciens s'écoutent et se répondent, se relaient dans les solos, réagissent en temps réel aux idées des autres. C'est un art profondément collectif et vivant, où l'individu s'exprime tout en restant à l'écoute du groupe. Cette conversation musicale en fait le charme.",
+      "Au fil du siècle, le jazz n'a cessé de se réinventer, se ramifiant en de multiples styles. Du jazz des débuts aux orchestres de swing, puis au bebop virtuose, au cool jazz, au jazz modal et à d'innombrables fusions, il a constamment absorbé de nouvelles influences tout en gardant son esprit d'invention.",
+      "Le jazz porte aussi une histoire sociale. Musique d'une communauté longtemps opprimée, il est devenu un symbole de créativité, de résistance et de liberté, avant de conquérir le monde entier et d'influencer une grande partie de la musique populaire moderne.",
+      "Écouter du jazz, c'est assister à une création en direct, où la maîtrise technique se met au service de la spontanéité. Il incarne peut-être mieux qu'aucune autre musique une idée précieuse : que la plus grande liberté naît d'un accord subtil entre l'individu et le collectif.",
+      "Le jazz a aussi profondément marqué toutes les musiques qui l'ont suivi. Le rock, la soul, le funk, le hip-hop et une grande partie de la pop lui doivent beaucoup, que ce soit dans le rythme, l'harmonie ou la place laissée à l'expression individuelle. En diffusant l'idée qu'un musicien peut créer sur l'instant, en dialogue avec les autres, il a durablement transformé notre façon de concevoir et d'écouter la musique populaire à travers le monde.",
+    ],
+    retenir:
+      "Le jazz, né vers 1900 dans les communautés afro-américaines, repose sur l'improvisation, le « swing » et le dialogue entre musiciens. Sans cesse réinventé (swing, bebop, cool…), il est devenu un symbole universel de liberté et de créativité.",
+    funFact:
+      "Dans un morceau de jazz, la même chanson jouée deux soirs de suite peut sonner totalement différemment : l'improvisation fait de chaque interprétation une pièce unique, impossible à rejouer à l'identique.",
+    quiz: [
+      {
+        question: "Qu'est-ce qui distingue profondément le jazz ?",
+        options: [
+          "La lecture fidèle d'une partition",
+          "L'improvisation",
+          "L'absence de rythme",
+          "L'usage exclusif du piano",
+        ],
+        answer: 1,
+        explain: "Le musicien invente en grande partie sur le moment.",
+      },
+      {
+        question: "Où le jazz est-il né ?",
+        options: [
+          "À Paris",
+          "Dans les communautés afro-américaines du sud des États-Unis",
+          "En Angleterre",
+          "Au Japon",
+        ],
+        answer: 1,
+        explain: "Notamment à La Nouvelle-Orléans, au début du XXe siècle.",
+      },
+      {
+        question: "Qu'est-ce que le « swing » ?",
+        options: [
+          "Un instrument",
+          "Une manière souple de placer les notes qui donne le balancement",
+          "Un style de danse uniquement",
+          "Une partition",
+        ],
+        answer: 1,
+        explain: "Il se ressent plus qu'il ne s'explique.",
+      },
+    ],
+  },
+  {
+    id: "algorithmes-reseaux",
+    title: "Les algorithmes des réseaux sociaux",
+    category: "technologie",
+    minutes: 5,
+    summary: "Qui décide de ce que vous voyez en ligne, et pourquoi ça vous garde scotché.",
+    body: [
+      "Chaque fois que vous ouvrez un réseau social, vous ne voyez pas tout ce qui a été publié, ni dans l'ordre. Un programme choisit pour vous : c'est l'algorithme de recommandation. Invisible mais omniprésent, il façonne une grande partie de ce que des milliards de personnes lisent, regardent et pensent chaque jour. Comprendre sa logique est devenu essentiel.",
+      "Son objectif est simple à énoncer : capter et retenir votre attention le plus longtemps possible. Car le modèle économique de ces plateformes repose sur la publicité : plus vous restez, plus elles peuvent vous montrer d'annonces. L'algorithme est donc optimisé pour maximiser votre « temps d'écran » et vos interactions — likes, partages, commentaires.",
+      "Pour cela, il apprend de vous en permanence. Chaque clic, chaque seconde passée sur une vidéo, chaque pause du pouce est enregistrée et analysée. À partir de ces signaux, il devine ce qui vous fait réagir et vous en propose toujours plus. Le fil que vous voyez est ainsi un miroir de vos comportements, ajusté en temps réel.",
+      "Cette mécanique a des effets puissants. En vous montrant surtout ce qui vous plaît ou vous conforte, elle peut vous enfermer dans une « bulle » où vos opinions sont sans cesse renforcées. Or ce qui capte le plus l'attention n'est pas forcément ce qui est vrai ou utile : les contenus qui suscitent l'indignation ou l'émotion forte sont souvent favorisés.",
+      "Ces algorithmes soulèvent donc de vraies questions de société. Ils peuvent amplifier la désinformation, accentuer les polarisations, et affecter le bien-être, notamment des plus jeunes, en exploitant des ressorts psychologiques comme la récompense variable — le même mécanisme que les machines à sous. Le débat sur leur régulation est aujourd'hui vif.",
+      "Il ne s'agit pas de diaboliser ces outils, qui permettent aussi de s'informer, se divertir et se relier. Mais de comprendre qu'ils ne sont pas neutres : ils poursuivent un but précis, qui n'est pas nécessairement votre intérêt. Ce que vous voyez résulte de choix de conception, pas d'un simple reflet du monde.",
+      "Reprendre un peu la main est possible : questionner ce qui nous est présenté, diversifier ses sources, gérer son temps, régler ses paramètres. À l'ère des algorithmes, l'esprit critique et une forme d'« hygiène numérique » deviennent des compétences aussi précieuses que rares.",
+      "Il est utile de savoir que ces algorithmes ne sont pas immuables : ils sont conçus, ajustés et parfois modifiés par des entreprises en fonction de leurs objectifs. Ce qui a été programmé peut être reprogrammé, et plusieurs pays réfléchissent à imposer plus de transparence sur leur fonctionnement. En attendant, comprendre qu'un fil d'actualité est le produit de choix précis, et non un reflet neutre du monde, est déjà un premier pas vers un usage plus lucide.",
+    ],
+    retenir:
+      "Les algorithmes des réseaux sociaux choisissent ce que vous voyez pour maximiser votre temps d'écran (modèle publicitaire). En favorisant ce qui capte l'attention, ils peuvent enfermer dans des bulles et amplifier la désinformation. D'où l'importance de l'esprit critique.",
+    funFact:
+      "Le « défilement infini » et les notifications exploitent le même ressort psychologique que les machines à sous : la récompense imprévisible, qui pousse à revenir encore et encore.",
+    quiz: [
+      {
+        question: "Quel est l'objectif principal de ces algorithmes ?",
+        options: [
+          "Vous informer objectivement",
+          "Capter et retenir votre attention le plus longtemps possible",
+          "Réduire votre temps d'écran",
+          "Montrer tout dans l'ordre chronologique",
+        ],
+        answer: 1,
+        explain: "Le modèle publicitaire récompense le temps passé.",
+      },
+      {
+        question: "Qu'est-ce qu'une « bulle » de filtres ?",
+        options: [
+          "Un bug d'affichage",
+          "Un enfermement dans des contenus qui confortent nos opinions",
+          "Un type de publicité",
+          "Une panne de réseau",
+        ],
+        answer: 1,
+        explain: "L'algorithme montre surtout ce qui nous plaît.",
+      },
+      {
+        question: "Quel ressort psychologique ces plateformes exploitent-elles ?",
+        options: [
+          "La récompense variable, comme les machines à sous",
+          "La fatigue",
+          "La faim",
+          "Aucun",
+        ],
+        answer: 0,
+        explain: "L'imprévisibilité pousse à revenir sans cesse.",
+      },
+    ],
+  },
+  {
+    id: "semi-conducteurs",
+    title: "Les puces : le pétrole du XXIe siècle",
+    category: "technologie",
+    minutes: 5,
+    summary: "Ces minuscules circuits invisibles font tourner le monde — et déclenchent des rivalités mondiales.",
+    body: [
+      "Dans votre téléphone, votre voiture, votre carte bancaire, votre réfrigérateur : partout se cachent des puces électroniques, ou semi-conducteurs. Ces composants minuscules, gravés dans le silicium, sont le cerveau de presque tous les appareils modernes. On les compare parfois au « pétrole du XXIe siècle », tant l'économie mondiale en dépend.",
+      "Une puce est un circuit électronique intégré sur une petite plaque de silicium. Elle contient des transistors, de minuscules interrupteurs qui laissent ou non passer le courant, et manipulent ainsi l'information sous forme de 0 et de 1. La prouesse tient à leur nombre : une puce moderne en compte des dizaines de milliards, gravés à une échelle de quelques atomes.",
+      "Cette miniaturisation extrême suit une tendance historique : à peu près tous les deux ans, on a longtemps réussi à doubler le nombre de transistors sur une puce. C'est ce qui explique que nos appareils soient devenus, en quelques décennies, incomparablement plus puissants, plus petits et moins chers. Cette course se heurte aujourd'hui aux limites de la physique.",
+      "Fabriquer ces puces est l'une des activités les plus complexes qui soient. Elle exige des usines gigantesques d'une propreté absolue, des machines d'une précision inouïe et des investissements colossaux. Résultat : la production de pointe est concentrée dans très peu d'entreprises et de pays, situés pour l'essentiel en Asie de l'Est.",
+      "Cette concentration en fait un enjeu géopolitique majeur. Celui qui maîtrise les puces les plus avancées détient un avantage stratégique décisif, car elles sont indispensables à l'intelligence artificielle, aux armes modernes et à toute l'économie numérique. D'où une véritable « guerre des puces » : restrictions à l'exportation, subventions massives, course à la souveraineté technologique.",
+      "La fragilité de cette chaîne d'approvisionnement est apparue au grand jour lors de pénuries récentes, qui ont paralysé des industries entières, de l'automobile à l'électronique. Une poignée d'usines défaillantes suffit à gripper l'économie mondiale, révélant notre dépendance à ces objets pourtant invisibles.",
+      "Les semi-conducteurs incarnent ainsi un paradoxe : plus ils sont petits et discrets, plus ils sont stratégiques. Comprendre leur importance, c'est saisir que la puissance, au XXIe siècle, se joue en partie à l'échelle de l'atome, dans quelques usines parmi les plus sophistiquées jamais construites.",
+      "Cette dépendance explique les efforts colossaux déployés par plusieurs puissances pour relocaliser une partie de la production sur leur sol, à coups de subventions massives. Mais construire une usine de pointe prend des années, coûte des dizaines de milliards et exige un savoir-faire rare. La souveraineté sur les puces ne se décrète donc pas : elle se construit lentement, ce qui en fait l'un des grands enjeux industriels et stratégiques des prochaines décennies.",
+    ],
+    retenir:
+      "Les semi-conducteurs (puces) sont le cerveau de tous les appareils modernes. Leur fabrication, extrêmement complexe, est concentrée dans peu de pays, ce qui en fait un enjeu géopolitique majeur — le « pétrole du XXIe siècle ».",
+    funFact:
+      "Les transistors d'une puce moderne sont si petits que des dizaines de milliers d'entre eux tiendraient dans l'épaisseur d'un cheveu humain.",
+    quiz: [
+      {
+        question: "À quoi servent les transistors d'une puce ?",
+        options: [
+          "À produire de la lumière",
+          "À manipuler l'information comme des interrupteurs (0 et 1)",
+          "À stocker de l'eau",
+          "À chauffer l'appareil",
+        ],
+        answer: 1,
+        explain: "Ce sont de minuscules interrupteurs électroniques.",
+      },
+      {
+        question: "Pourquoi les puces sont-elles un enjeu géopolitique ?",
+        options: [
+          "Leur production de pointe est concentrée dans peu de pays",
+          "Elles sont inutiles",
+          "Elles coûtent un euro",
+          "Tout le monde peut les fabriquer",
+        ],
+        answer: 0,
+        explain: "Elles sont indispensables à l'IA et à l'économie numérique.",
+      },
+      {
+        question: "Qu'ont révélé les pénuries récentes de puces ?",
+        options: [
+          "La dépendance de l'économie mondiale à quelques usines",
+          "Que les puces sont inutiles",
+          "La fin de l'électronique",
+          "Rien du tout",
+        ],
+        answer: 0,
+        explain: "Des industries entières ont été paralysées.",
+      },
+    ],
+  },
+  {
+    id: "cybersecurite",
+    title: "La cybersécurité",
+    category: "technologie",
+    minutes: 5,
+    summary: "Dans un monde connecté, protéger les données est devenu un enjeu vital.",
+    body: [
+      "Nos vies sont désormais numériques : argent, santé, communications, souvenirs, infrastructures vitales, tout passe par des systèmes informatiques. Cette dépendance a un revers : chacun de ces systèmes peut être attaqué. La cybersécurité, c'est l'ensemble des moyens pour protéger les données et les réseaux contre ces menaces. Un domaine devenu absolument central.",
+      "Les attaques prennent des formes variées. Le « hameçonnage » (phishing) piège l'utilisateur pour lui soutirer ses mots de passe en imitant un site ou un message de confiance. Les « rançongiciels » chiffrent les données d'une victime et exigent une rançon pour les débloquer. D'autres attaques visent à voler des informations, saboter des systèmes ou espionner.",
+      "Un point crucial, souvent négligé : le maillon le plus faible est rarement la technologie, c'est l'humain. La plupart des attaques réussissent en exploitant nos comportements — un mot de passe trop simple, une pièce jointe ouverte trop vite, une confiance mal placée. C'est ce qu'on appelle l'ingénierie sociale : manipuler les gens plutôt que les machines.",
+      "Les défenses reposent sur plusieurs principes. Des mots de passe solides et uniques, la « double authentification » qui ajoute une vérification supplémentaire, le chiffrement des données, les mises à jour régulières qui corrigent les failles, et la sauvegarde, indispensable pour se remettre d'une attaque. Aucune mesure n'est parfaite, mais leur combinaison réduit fortement les risques.",
+      "L'enjeu dépasse largement l'individu. Des hôpitaux, des entreprises, des administrations, des réseaux électriques ont été paralysés par des cyberattaques. Certaines sont même menées ou soutenues par des États, faisant du cyberespace un nouveau terrain de conflit, où l'on peut frapper un adversaire sans tirer un coup de feu.",
+      "Face à des menaces en constante évolution, la cybersécurité est une course sans fin entre attaquants et défenseurs. Chaque nouvelle technologie — objets connectés, intelligence artificielle — ouvre de nouvelles portes, à protéger comme à exploiter. La vigilance ne peut jamais se relâcher complètement.",
+      "La bonne nouvelle, c'est qu'une grande partie de la protection relève de gestes simples et de bon sens. Se méfier des messages trop beaux ou trop alarmants, sécuriser ses comptes, se tenir informé : à l'ère numérique, la cybersécurité commence par chacun de nous.",
+      "La montée de l'intelligence artificielle rebat d'ailleurs les cartes des deux côtés. Elle aide les défenseurs à repérer plus vite les attaques, mais fournit aussi aux pirates des outils pour créer des messages piégés plus convaincants ou automatiser leurs offensives. Cette course technologique perpétuelle confirme une idée simple : la sécurité n'est jamais un état acquis une fois pour toutes, mais un effort continu, à la fois technique, organisationnel et humain.",
+    ],
+    retenir:
+      "La cybersécurité protège données et réseaux contre les attaques (hameçonnage, rançongiciels…). Le maillon faible est souvent l'humain (ingénierie sociale). Mots de passe solides, double authentification, mises à jour et sauvegardes réduisent les risques.",
+    funFact:
+      "La plupart des cyberattaques ne « cassent » pas la technologie : elles trompent les personnes. Un simple e-mail bien imité reste l'une des armes les plus efficaces des pirates.",
+    quiz: [
+      {
+        question: "Qu'est-ce que l'hameçonnage (phishing) ?",
+        options: [
+          "Un virus qui détruit l'ordinateur",
+          "Un piège pour soutirer des informations en imitant un site de confiance",
+          "Un logiciel de sauvegarde",
+          "Un type de mot de passe",
+        ],
+        answer: 1,
+        explain: "Il exploite la confiance de l'utilisateur.",
+      },
+      {
+        question: "Quel est souvent le maillon le plus faible en cybersécurité ?",
+        options: ["Les câbles", "L'humain", "L'électricité", "Les écrans"],
+        answer: 1,
+        explain: "L'ingénierie sociale manipule les gens plutôt que les machines.",
+      },
+      {
+        question: "Quelle mesure renforce la sécurité d'un compte ?",
+        options: [
+          "La double authentification",
+          "Un mot de passe unique comme « 1234 »",
+          "Partager son mot de passe",
+          "Ne jamais mettre à jour",
+        ],
+        answer: 0,
+        explain: "Elle ajoute une vérification supplémentaire.",
+      },
+    ],
+  },
 ];
 
 /** Renvoie la leçon du jour de façon déterministe (change chaque jour). */

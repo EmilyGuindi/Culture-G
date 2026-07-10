@@ -388,3 +388,126 @@ h1, h2, h3 { font-family: var(--font-editorial); font-weight: 600; margin: 0; le
   .view { padding-top: 40px; }
   .page-head h1 { font-size: 2.2rem; }
 }
+
+/* =========================================================
+   GAMIFICATION — niveaux, XP, badges, objectif, confettis
+   ========================================================= */
+
+/* Carte de niveau (accueil) */
+.level-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  color: #fff;
+  background: linear-gradient(135deg, #24406b 0%, #1b2e4a 55%, #2a2350 100%);
+  box-shadow: var(--shadow-card);
+}
+.level-card::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(60% 80% at 85% -10%, rgba(198,161,91,0.45), transparent 60%),
+    radial-gradient(50% 70% at 0% 120%, rgba(120,160,255,0.25), transparent 60%);
+  pointer-events: none;
+}
+.level-card .lvl-top { display: flex; align-items: center; gap: 12px; position: relative; }
+.level-badge {
+  width: 52px; height: 52px; flex: none;
+  border-radius: 15px;
+  display: grid; place-items: center;
+  font-family: var(--font-editorial); font-weight: 700; font-size: 1.3rem;
+  color: #2a2410;
+  background: linear-gradient(150deg, #f0d79a, var(--gold));
+  box-shadow: 0 6px 16px -6px rgba(198,161,91,0.9), inset 0 1px 0 rgba(255,255,255,0.5);
+}
+.level-card .lvl-meta { flex: 1; min-width: 0; }
+.level-card .lvl-title { font-family: var(--font-editorial); font-weight: 600; font-size: 1.2rem; line-height: 1.1; }
+.level-card .lvl-sub { font-size: 0.8rem; color: rgba(255,255,255,0.7); }
+.level-card .lvl-xp { text-align: right; font-variant-numeric: tabular-nums; }
+.level-card .lvl-xp b { font-family: var(--font-editorial); font-size: 1.15rem; }
+
+/* Barre d'XP avec brillance */
+.xpbar { position: relative; height: 10px; border-radius: 999px; background: rgba(255,255,255,0.16); overflow: hidden; margin-top: 14px; }
+.xpbar > span {
+  display: block; height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, #e9dcc0, var(--gold));
+  box-shadow: 0 0 12px rgba(198,161,91,0.7);
+  transition: width 0.6s cubic-bezier(0.22,1,0.36,1);
+  position: relative; overflow: hidden;
+}
+.xpbar > span::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%);
+  transform: translateX(-100%); animation: shimmer 2.4s infinite;
+}
+@keyframes shimmer { to { transform: translateX(100%); } }
+.level-card .lvl-next { margin-top: 8px; font-size: 0.76rem; color: rgba(255,255,255,0.72); display: flex; justify-content: space-between; }
+
+/* Objectif du jour + streak (ligne d'anneaux) */
+.rings { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ring-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-md);
+  padding: 14px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-soft);
+}
+.mini-ring {
+  width: 46px; height: 46px; flex: none; border-radius: 50%;
+  display: grid; place-items: center; font-size: 1.3rem;
+  background: conic-gradient(var(--gold) var(--p,0%), var(--line) 0);
+}
+.mini-ring .hole { width: 36px; height: 36px; border-radius: 50%; background: var(--card); display: grid; place-items: center; }
+.ring-card .rc-val { font-family: var(--font-editorial); font-weight: 600; font-size: 1.2rem; color: var(--navy); line-height: 1; }
+.ring-card .rc-lbl { font-size: 0.72rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; }
+.flame-anim { display: inline-block; animation: flicker 1.6s ease-in-out infinite; }
+@keyframes flicker { 0%,100% { transform: scale(1) rotate(-2deg); } 50% { transform: scale(1.12) rotate(2deg); } }
+
+/* Badges */
+.badge-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.badge {
+  text-align: center; padding: 12px 6px; border-radius: var(--radius-md);
+  background: var(--cream-soft); border: 1px solid var(--line);
+}
+.badge .b-ic {
+  width: 46px; height: 46px; margin: 0 auto 6px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 1.4rem;
+  background: #fff; border: 1px solid var(--line);
+}
+.badge.earned { background: linear-gradient(160deg, #fbf4e4, #fff); border-color: var(--gold-soft); }
+.badge.earned .b-ic { background: linear-gradient(150deg, #f3e6c6, var(--gold-soft)); box-shadow: 0 6px 14px -8px rgba(198,161,91,0.9); }
+.badge.locked { opacity: 0.5; filter: grayscale(1); }
+.badge .b-name { font-size: 0.66rem; font-weight: 600; line-height: 1.2; color: var(--ink-soft); }
+
+/* Écran de résultats gamifié */
+.reward { text-align: center; }
+.xp-pop {
+  display: inline-block; margin: 10px auto; padding: 8px 20px; border-radius: 999px;
+  font-family: var(--font-editorial); font-weight: 700; font-size: 1.3rem; color: #6b5320;
+  background: linear-gradient(150deg, #f3e6c6, var(--gold-soft));
+  box-shadow: 0 8px 20px -10px rgba(198,161,91,0.9);
+  animation: pop 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+@keyframes pop { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.12); } 100% { transform: scale(1); opacity: 1; } }
+
+.levelup {
+  margin: 16px 0; padding: 16px; border-radius: var(--radius-md);
+  color: #fff; background: linear-gradient(135deg, var(--navy), #2a2350);
+  box-shadow: var(--shadow-card); animation: rise 0.5s both;
+}
+.levelup .lu-eyebrow { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-soft); }
+.levelup .lu-title { font-family: var(--font-editorial); font-size: 1.35rem; margin-top: 4px; }
+
+.badge-unlocked { display: flex; align-items: center; gap: 12px; justify-content: center; margin: 12px auto; padding: 12px 16px; max-width: 320px; border-radius: var(--radius-md); background: var(--cream-soft); border: 1px solid var(--gold-soft); animation: rise 0.5s both; }
+.badge-unlocked .bu-ic { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-size: 1.3rem; background: linear-gradient(150deg, #f3e6c6, var(--gold-soft)); }
+.badge-unlocked .bu-txt { text-align: left; }
+.badge-unlocked .bu-title { font-weight: 700; font-size: 0.9rem; }
+.badge-unlocked .bu-desc { font-size: 0.76rem; color: var(--ink-faint); }
+
+/* Confettis */
+#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+
+/* Récompense XP annoncée sur le hero */
+.reward-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 0.78rem; font-weight: 600; color: var(--gold-soft); background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 999px; margin-top: 12px; }
+
+/* Progress général vers la maîtrise (profil) */
+.big-progress { display: flex; align-items: baseline; gap: 8px; justify-content: center; }
+.big-progress .bp-num { font-family: var(--font-editorial); font-size: 2.6rem; font-weight: 700; color: var(--gold); }

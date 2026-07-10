@@ -1,4 +1,4 @@
-import { store } from "../store.js";
+import { store, LEVELS } from "../store.js";
 import { navigate } from "../router.js";
 
 function barColor(pct) {
@@ -13,6 +13,8 @@ export async function renderProfile() {
   const strong = store.strongestTheme();
   const weak = store.weakestTheme();
   const global = store.getGlobalScore();
+  const lvl = store.levelInfo();
+  const badges = store.getBadges();
 
   const el = document.createElement("div");
   el.className = "stagger";
@@ -23,31 +25,52 @@ export async function renderProfile() {
       <h1>Ma culture G</h1>
     </header>
 
-    <section class="card profile-hero">
-      <div class="avatar">CG</div>
-      <div class="stat-value" style="font-size:2.4rem;color:var(--navy);">${global}<span style="font-size:1.1rem;color:var(--ink-faint);">/100</span></div>
-      <div class="stat-label">Score global de culture générale</div>
-      <div class="progress" style="max-width:260px;margin:14px auto 0;"><span style="width:${global}%"></span></div>
+    <section class="level-card">
+      <div class="lvl-top">
+        <div class="level-badge">Niv.${lvl.index + 1}</div>
+        <div class="lvl-meta">
+          <div class="lvl-title">${lvl.title}</div>
+          <div class="lvl-sub">${lvl.isMax ? "Niveau maximum 🏆" : `Plus que ${lvl.toNext} XP pour le niveau ${lvl.index + 2}`}</div>
+        </div>
+        <div class="lvl-xp"><b>${lvl.xp}</b><br><span class="lvl-sub">XP total</span></div>
+      </div>
+      <div class="xpbar"><span style="width:${lvl.pct}%"></span></div>
     </section>
 
     <div class="stat-grid">
       <div class="stat">
-        <div class="stat-value"><span class="flame">🔥</span> ${store.state.streak}</div>
-        <div class="stat-label">Streak actuelle</div>
+        <div class="stat-value"><span class="flame-anim">🔥</span> ${store.state.streak}</div>
+        <div class="stat-label">Série en cours</div>
       </div>
       <div class="stat">
         <div class="stat-value">${store.completedCount}</div>
         <div class="stat-label">Leçons terminées</div>
       </div>
       <div class="stat">
-        <div class="stat-value">${store.state.bestStreak}</div>
-        <div class="stat-label">Meilleure streak</div>
+        <div class="stat-value">${store.earnedBadgeCount}/${badges.length}</div>
+        <div class="stat-label">Badges obtenus</div>
       </div>
       <div class="stat">
-        <div class="stat-value">${played.length}/${themes.length}</div>
-        <div class="stat-label">Thèmes explorés</div>
+        <div class="stat-value">${global}<span style="font-size:1rem;color:var(--ink-faint);">/100</span></div>
+        <div class="stat-label">Score de culture G</div>
       </div>
     </div>
+
+    <h3 class="section-title">Mes badges</h3>
+    <section class="card">
+      <div class="badge-grid">
+        ${badges
+          .map(
+            (b) => `
+          <div class="badge ${b.earned ? "earned" : "locked"}" title="${b.desc}">
+            <div class="b-ic">${b.icon}</div>
+            <div class="b-name">${b.title}</div>
+          </div>`
+          )
+          .join("")}
+      </div>
+      <p class="muted center" style="margin-top:12px;font-size:.82rem;">Touchez un badge pour voir comment l'obtenir.</p>
+    </section>
 
     ${
       strong || weak
@@ -83,6 +106,12 @@ export async function renderProfile() {
     </div>
   `;
 
+  el.querySelectorAll(".badge").forEach((b) => {
+    b.addEventListener("click", () => {
+      const name = b.querySelector(".b-name").textContent;
+      alert(`${name}\n\n${b.getAttribute("title")}${b.classList.contains("earned") ? "\n\n✅ Débloqué !" : "\n\n🔒 À débloquer"}`);
+    });
+  });
   el.querySelector("#go").addEventListener("click", () => navigate("home"));
   el.querySelector("#reset").addEventListener("click", () => {
     if (confirm("Réinitialiser toute votre progression ? Cette action est irréversible.")) {
