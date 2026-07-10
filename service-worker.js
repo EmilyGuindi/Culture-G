@@ -1,13 +1,15 @@
 /**
  * Service worker — Culture G Daily
- * Met l'app en cache pour un fonctionnement hors-ligne (PWA installable).
- * Stratégie : cache-first pour le shell, retour réseau, fallback index.html
- * pour les navigations (SPA).
+ * PWA installable + fonctionnement hors-ligne.
+ *
+ * Stratégie : NETWORK-FIRST pour les ressources de l'app (on récupère
+ * toujours la dernière version quand on est en ligne, et on retombe sur le
+ * cache hors-ligne). Évite de servir une version périmée après une mise à jour.
  *
  * Pense à incrémenter CACHE_VERSION à chaque changement d'assets.
  */
 
-const CACHE_VERSION = "culture-g-v1";
+const CACHE_VERSION = "culture-g-v2";
 
 // Chemins relatifs au scope du SW (fonctionne aussi sous /Culture-G/ sur Pages)
 const APP_SHELL = [
@@ -58,7 +60,7 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(req.url);
 
-  // Navigations (changement de page / ouverture) → shell en fallback
+  // Navigations (SPA) → réseau d'abord, fallback index.html hors-ligne
   if (req.mode === "navigate") {
     event.respondWith(
       fetch(req).catch(() => caches.match("index.html", { ignoreSearch: true }))
@@ -69,17 +71,15 @@ self.addEventListener("fetch", (event) => {
   // Ne gère que le même origine (les polices externes passent en réseau direct)
   if (url.origin !== self.location.origin) return;
 
+  // NETWORK-FIRST : on tente le réseau, on met à jour le cache, et on
+  // retombe sur le cache uniquement si le réseau échoue (hors-ligne).
   event.respondWith(
-    caches.match(req, { ignoreSearch: false }).then((cached) => {
-      if (cached) return cached;
-      return fetch(req)
-        .then((res) => {
-          // Met en cache les nouvelles ressources same-origin
-          const copy = res.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put(req, copy));
-          return res;
-        })
-        .catch(() => cached);
-    })
+    fetch(req)
+      .then((res) => {
+        const copy = res.clone();
+        caches.open(CACHE_VERSION).then((cache) => cache.put(req, copy));
+        return res;
+      })
+      .catch(() => caches.match(req, { ignoreSearch: false }))
   );
 });
