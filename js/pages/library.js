@@ -54,7 +54,7 @@ export async function renderLibrary(params) {
           const st = STATUS_LABEL[store.getStatus(l.id)];
           const c = catById[l.category];
           return `
-          <div class="topic" data-id="${l.id}">
+          <div class="topic" data-id="${l.id}" style="--accent:${c.color};">
             <div class="ic">${c.icon}</div>
             <div class="t-main">
               <div class="t-title">${l.title} ${l.generated ? '<span class="ia-tag">IA</span>' : ""}</div>

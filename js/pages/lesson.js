@@ -14,7 +14,7 @@ export async function renderLesson(params) {
   el.innerHTML = `
     <button class="btn btn-ghost" id="back">← Retour</button>
 
-    <article>
+    <article style="--accent:${cat.color};">
       <div class="lesson-meta">
         <span class="chip">${cat.icon} ${cat.label}</span>
         <span class="muted" style="font-size:.85rem;">${lesson.minutes} min de lecture</span>

@@ -259,7 +259,7 @@ class Store {
     return CATEGORIES.map((c) => {
       const s = this.state.categoryScores[c.id];
       const pct = s && s.total ? Math.round((s.correct / s.total) * 100) : null;
-      return { id: c.id, label: c.label, icon: c.icon, pct, played: !!s };
+      return { id: c.id, label: c.label, icon: c.icon, color: c.color, pct, played: !!s };
     });
   }
 

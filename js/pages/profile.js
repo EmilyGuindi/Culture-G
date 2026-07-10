@@ -1,12 +1,6 @@
 import { store, LEVELS } from "../store.js";
 import { navigate } from "../router.js";
 
-function barColor(pct) {
-  if (pct >= 70) return "var(--success)";
-  if (pct >= 40) return "var(--gold)";
-  return "var(--danger)";
-}
-
 export async function renderProfile() {
   const themes = store.getThemeScores();
   const played = themes.filter((t) => t.played);
@@ -91,7 +85,7 @@ export async function renderProfile() {
             return `
             <div class="theme-row">
               <span class="t-name">${t.icon} ${t.label}</span>
-              <span class="bar"><span style="width:${pct}%;background:${barColor(pct)}"></span></span>
+              <span class="bar"><span style="width:${pct}%;background:${t.color}"></span></span>
               <span class="pct">${t.played ? pct + "%" : "—"}</span>
             </div>`;
           })

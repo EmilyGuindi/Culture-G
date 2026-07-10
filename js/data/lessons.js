@@ -14,13 +14,13 @@
  */
 
 export const CATEGORIES = [
-  { id: "histoire", label: "Histoire", icon: "🏛️" },
-  { id: "geopolitique", label: "Géopolitique", icon: "🌍" },
-  { id: "sciences", label: "Sciences", icon: "🔬" },
-  { id: "economie", label: "Économie", icon: "📈" },
-  { id: "philosophie", label: "Philosophie", icon: "💭" },
-  { id: "arts", label: "Arts", icon: "🎨" },
-  { id: "technologie", label: "Technologie", icon: "💻" },
+  { id: "histoire", label: "Histoire", icon: "🏛️", color: "#E0785F" },
+  { id: "geopolitique", label: "Géopolitique", icon: "🌍", color: "#34C2B0" },
+  { id: "sciences", label: "Sciences", icon: "🔬", color: "#8E7BEE" },
+  { id: "economie", label: "Économie", icon: "📈", color: "#5BB98C" },
+  { id: "philosophie", label: "Philosophie", icon: "💭", color: "#E7B45A" },
+  { id: "arts", label: "Arts", icon: "🎨", color: "#EC6FA6" },
+  { id: "technologie", label: "Technologie", icon: "💻", color: "#4FA9E0" },
 ];
 
 export const LESSONS = [

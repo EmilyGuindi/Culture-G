@@ -60,7 +60,7 @@ export async function renderHome() {
       </div>
     </div>
 
-    <section class="hero-card" style="margin-top:16px;">
+    <section class="hero-card" style="margin-top:16px;--accent:${cat.color};">
       <span class="eyebrow">Leçon du jour</span>
       <h2>${daily.title}</h2>
       <div class="hero-cat">${cat.icon} ${cat.label} · ${daily.minutes} min${status === "mastered" ? " · ✓ maîtrisée" : ""}</div>
