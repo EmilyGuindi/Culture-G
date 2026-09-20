@@ -6,27 +6,28 @@
    ========================================================= */
 
 :root {
-  /* Fond & surfaces */
-  --bg: #131120;
-  --bg-deep: #0D0C16;
-  --surface: #1B1930;
-  --surface-2: #242240;
-  --surface-3: #2C2A4A;
-  --line: #322F4E;
-  --line-soft: #272544;
+  /* Fond & surfaces — « Nocturne Océan » : bleu nuit profond */
+  --bg: #0E1C2E;
+  --bg-deep: #081321;
+  --surface: #142A40;
+  --surface-2: #1B3552;
+  --surface-3: #234065;
+  --line: #294863;
+  --line-soft: #1E3A52;
 
-  /* Encre */
-  --ink: #F2EEE6;
-  --ink-soft: #C3BED6;
-  --ink-faint: #8B86A6;
+  /* Encre (blanc froid) */
+  --ink: #EEF3F8;
+  --ink-soft: #B4C6D6;
+  --ink-faint: #6F889E;
 
   /* Accents */
-  --gold: #E7B45A;
-  --gold-2: #F2C878;
+  --gold: #E9B85C;
+  --gold-2: #F4CE80;
   --gold-soft: #6b5320;
-  --violet: #8E7BEE;
-  --success: #5BB98C;
-  --danger: #E0785F;
+  --aqua: #35C4D6;
+  --violet: var(--aqua); /* compat : ancien nom, désormais aqua */
+  --success: #4FC08D;
+  --danger: #EE785C;
 
   /* Teintes par thème (reprises de CATEGORIES) */
   --c-histoire: #E0785F;
@@ -76,9 +77,9 @@ body {
   flex-direction: column;
   align-items: center;
   background:
-    radial-gradient(90% 55% at 18% -8%, rgba(142, 123, 238, 0.20), transparent 60%),
-    radial-gradient(80% 50% at 100% 4%, rgba(231, 180, 90, 0.14), transparent 55%),
-    linear-gradient(180deg, #171528 0%, var(--bg) 30%, var(--bg-deep) 100%);
+    radial-gradient(90% 55% at 18% -8%, rgba(53, 196, 214, 0.18), transparent 60%),
+    radial-gradient(80% 50% at 100% 4%, rgba(233, 184, 92, 0.14), transparent 55%),
+    linear-gradient(180deg, #12283C 0%, var(--bg) 30%, var(--bg-deep) 100%);
 }
 .app-shell::before {
   content: "";
@@ -142,7 +143,7 @@ h1, h2, h3 { font-family: var(--font-editorial); font-weight: 600; margin: 0; le
   color: #fff;
   background:
     radial-gradient(130% 110% at 100% 0%, color-mix(in srgb, var(--accent) 40%, transparent), transparent 60%),
-    linear-gradient(160deg, #201d38 0%, #161428 100%);
+    linear-gradient(160deg, #163150 0%, #0E1E31 100%);
   border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
   box-shadow: var(--shadow-card), 0 0 0 1px rgba(255,255,255,0.03) inset;
 }
@@ -303,10 +304,10 @@ h1, h2, h3 { font-family: var(--font-editorial); font-weight: 600; margin: 0; le
 .profile-hero { text-align: center; padding: 26px 20px; }
 .avatar {
   width: 78px; height: 78px; margin: 0 auto 12px; border-radius: 50%;
-  background: linear-gradient(155deg, var(--violet), #4a3f8f);
+  background: linear-gradient(155deg, var(--aqua), #1c5a6b);
   color: var(--gold); display: grid; place-items: center;
   font-family: var(--font-editorial); font-size: 1.8rem; font-weight: 700;
-  box-shadow: 0 0 40px -8px rgba(142,123,238,0.6);
+  box-shadow: 0 0 40px -8px rgba(53,196,214,0.55);
 }
 .themes { display: grid; gap: 11px; margin-top: 12px; }
 .theme-row { display: flex; align-items: center; gap: 12px; }
@@ -346,10 +347,10 @@ h1, h2, h3 { font-family: var(--font-editorial); font-weight: 600; margin: 0; le
   position: relative; overflow: hidden; border-radius: var(--radius-lg);
   padding: 20px; color: #fff;
   background:
-    radial-gradient(70% 80% at 90% -10%, rgba(231,180,90,0.35), transparent 60%),
-    radial-gradient(60% 70% at -5% 110%, rgba(142,123,238,0.35), transparent 60%),
-    linear-gradient(150deg, #26224a 0%, #171430 60%);
-  border: 1px solid #3a3566;
+    radial-gradient(70% 80% at 90% -10%, rgba(233,184,92,0.34), transparent 60%),
+    radial-gradient(60% 70% at -5% 110%, rgba(53,196,214,0.34), transparent 60%),
+    linear-gradient(150deg, #204461 0%, #16304a 60%);
+  border: 1px solid #355976;
   box-shadow: var(--shadow-card);
 }
 .level-card .lvl-top { display: flex; align-items: center; gap: 13px; position: relative; }
@@ -393,7 +394,7 @@ h1, h2, h3 { font-family: var(--font-editorial); font-weight: 600; margin: 0; le
 .reward { text-align: center; }
 .xp-pop { display: inline-block; margin: 12px auto; padding: 8px 22px; border-radius: 999px; font-family: var(--font-editorial); font-weight: 700; font-size: 1.35rem; color: #2a1e07; background: linear-gradient(150deg, var(--gold-2), var(--gold)); box-shadow: 0 10px 26px -10px rgba(231,180,90,0.9); animation: pop 0.5s cubic-bezier(0.22,1,0.36,1); }
 @keyframes pop { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.12); } 100% { transform: scale(1); opacity: 1; } }
-.levelup { margin: 16px 0; padding: 16px; border-radius: var(--radius-md); color: #fff; background: linear-gradient(135deg, var(--violet), #3a3080); box-shadow: var(--shadow-card); animation: rise 0.5s both; }
+.levelup { margin: 16px 0; padding: 16px; border-radius: var(--radius-md); color: #fff; background: linear-gradient(135deg, var(--aqua), #14506b); box-shadow: var(--shadow-card); animation: rise 0.5s both; }
 .levelup .lu-eyebrow { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
 .levelup .lu-title { font-family: var(--font-editorial); font-size: 1.35rem; margin-top: 4px; }
 .badge-unlocked { display: flex; align-items: center; gap: 12px; justify-content: center; margin: 12px auto; padding: 12px 16px; max-width: 320px; border-radius: var(--radius-md); background: var(--surface); border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--line)); animation: rise 0.5s both; }
@@ -450,9 +451,9 @@ select.input { appearance: none; cursor: pointer; }
   position: fixed; inset: -20% -20% auto -20%; height: 70%;
   pointer-events: none; z-index: 0; opacity: 0.5;
   background:
-    radial-gradient(45% 55% at 20% 20%, rgba(142,123,238,0.22), transparent 70%),
-    radial-gradient(40% 50% at 85% 10%, rgba(231,180,90,0.16), transparent 70%),
-    radial-gradient(35% 45% at 60% 40%, rgba(236,111,166,0.10), transparent 70%);
+    radial-gradient(45% 55% at 20% 20%, rgba(53,196,214,0.20), transparent 70%),
+    radial-gradient(40% 50% at 85% 10%, rgba(233,184,92,0.16), transparent 70%),
+    radial-gradient(35% 45% at 60% 40%, rgba(79,192,141,0.10), transparent 70%);
   filter: blur(10px);
   animation: aurora 18s ease-in-out infinite alternate;
 }
@@ -470,7 +471,7 @@ select.input { appearance: none; cursor: pointer; }
   color: #fff;
   background:
     radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--accent) 44%, transparent), transparent 62%),
-    linear-gradient(158deg, #221f3d 0%, #14122a 100%);
+    linear-gradient(158deg, #17324f 0%, #0C1B2C 100%);
   border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
   box-shadow: var(--shadow-card), 0 0 0 1px rgba(255,255,255,0.03) inset,
               0 0 60px -30px color-mix(in srgb, var(--accent) 90%, transparent);
