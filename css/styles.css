@@ -590,6 +590,27 @@ p, .hook, .hero-preview, .lesson-body p, .callout p, .lvl-sub { text-wrap: prett
 .explore-card:active,
 .icon-btn:active { transform: translateY(1px) scale(0.99); }
 
+/* Bandeau « Mise à jour dispo » (app native) */
+.update-banner {
+  position: fixed; left: 12px; right: 12px;
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  z-index: 40; display: flex; align-items: center; gap: 12px;
+  padding: 12px 12px 12px 16px; border-radius: var(--radius-md);
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, var(--line));
+  box-shadow: var(--shadow-card);
+  transform: translateY(140%); opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.3s;
+  max-width: var(--maxw); margin: 0 auto;
+}
+.update-banner.show { transform: translateY(0); opacity: 1; }
+.update-banner .ub-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.update-banner .ub-txt strong { font-size: 0.95rem; }
+.update-banner .ub-txt .muted { font-size: 0.78rem; }
+.update-banner .btn.small { flex: none; }
+.update-banner .ub-close { flex: none; background: none; border: none; color: var(--ink-faint); font-size: 0.9rem; cursor: pointer; padding: 6px; border-radius: 8px; }
+.update-banner .ub-close:hover { color: var(--ink); }
+
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
 
 @media (min-width: 720px) {

@@ -5,5 +5,13 @@
   "backgroundColor": "#081321",
   "android": {
     "backgroundColor": "#081321"
+  },
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": true
+    },
+    "CapacitorHttp": {
+      "enabled": true
+    }
   }
 }

@@ -20,6 +20,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Clé Capgo pour les mises à jour web silencieuses (OTA). Optionnelle :
+      # si le secret CAPGO_TOKEN n'est pas défini, l'étape OTA est ignorée.
+      CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,14 +49,42 @@ jobs:
       - name: Assemble web assets (www/)
         run: npm run build:web
 
+      - name: Publier le bundle OTA (Capgo, si configuré)
+        if: ${{ env.CAPGO_TOKEN != '' }}
+        continue-on-error: true # ne jamais bloquer l'APK si Capgo est mal configuré
+        run: >-
+          npx -y @capgo/cli@latest bundle upload
+          -a "$CAPGO_TOKEN"
+          --channel production
+          --path www
+          --bundle "1.0.${{ github.run_number }}"
+
       - name: Add Android platform
         run: npx cap add android
+
+      - name: Versionner l'app (versionCode/versionName)
+        run: |
+          sed -i "s/versionCode 1/versionCode ${{ github.run_number }}/" android/app/build.gradle
+          sed -i "s/versionName \"1.0\"/versionName \"1.0.${{ github.run_number }}\"/" android/app/build.gradle
+          grep -E "versionCode|versionName" android/app/build.gradle
 
       - name: Build debug APK
         run: cd android && ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Rename APK
         run: cp android/app/build/outputs/apk/debug/app-debug.apk culture-g.apk
+
+      - name: Écrire app-version.json (pour le bandeau de MAJ)
+        run: |
+          cat > app-version.json <<JSON
+          {
+            "versionCode": ${{ github.run_number }},
+            "versionName": "1.0.${{ github.run_number }}",
+            "apkUrl": "https://github.com/EmilyGuindi/Culture-G/releases/download/android-latest/culture-g.apk",
+            "build": "${{ github.sha }}"
+          }
+          JSON
+          cat app-version.json
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
@@ -79,5 +111,11 @@ jobs:
             L'app fonctionne hors-ligne. La génération de leçons par IA
             (optionnelle) nécessite internet + une clé API.
 
-            _Build : ${{ github.sha }}_
-          files: culture-g.apk
+            L'app se met à jour toute seule pour les changements de contenu
+            (OTA). Pour les mises à jour natives, elle affiche un bandeau
+            « Mettre à jour » — un seul tap suffit.
+
+            _Build : 1.0.${{ github.run_number }} (${{ github.sha }})_
+          files: |
+            culture-g.apk
+            app-version.json

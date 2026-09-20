@@ -60,6 +60,25 @@ npm run android:apk
 `npm run build:web` assemble le dossier `www/` (les fichiers embarqués),
 `npx cap add android` génère le projet natif, et Gradle produit l'APK.
 
+### Mises à jour de l'app installée
+
+Une APK sideloadée ne se met pas à jour toute seule comme sur le Play Store,
+mais deux mécanismes couvrent les deux types de changements :
+
+- **Contenu / design (web) → OTA silencieux.** Le plugin
+  [`@capgo/capacitor-updater`](https://capgo.app/) applique les nouveaux
+  bundles web au lancement, sans réinstaller. **À activer une fois** :
+  1. Crée un compte Capgo (palier gratuit) et enregistre l'app :
+     `npx @capgo/cli app add com.cultureg.daily` puis récupère ta clé API.
+  2. Ajoute-la dans le dépôt : *Settings → Secrets and variables → Actions →
+     New secret* nommé `CAPGO_TOKEN`. La CI enverra alors chaque build à Capgo.
+- **Changements natifs → bandeau « Mettre à jour ».** L'app compare sa
+  `versionCode` à `app-version.json` (publié dans la Release) et propose
+  d'installer la nouvelle APK en un tap. Rien à configurer.
+
+> ⚠️ Il faut **réinstaller une fois** l'APK qui contient ce système de mise à
+> jour pour que les suivantes se fassent automatiquement (OTA) ou en un tap.
+
 ## 🧱 Architecture
 
 ```

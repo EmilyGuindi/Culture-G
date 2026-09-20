@@ -5,6 +5,7 @@
 
 import { register, setNotFound, startRouter } from "./router.js";
 import { mountNav } from "./components/nav.js";
+import { initUpdateCheck } from "./update-check.js";
 
 import { renderHome } from "./pages/home.js";
 import { renderLesson } from "./pages/lesson.js";
@@ -24,3 +25,6 @@ setNotFound(renderHome);
 
 mountNav();
 startRouter();
+
+// Mises à jour (OTA silencieux + bandeau natif) — sans effet sur le web.
+initUpdateCheck();
