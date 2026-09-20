@@ -1,20 +1,21 @@
 /**
- * Mise à jour de l'app installée (APK sideloadée).
+ * Mises à jour de l'app installée (APK sideloadée), 100 % auto-hébergées.
+ * Aucun service tiers, aucun compte : tout passe par la Release GitHub.
  *
  * Deux niveaux complémentaires :
- *  - OTA silencieux (contenu web) : géré nativement par le plugin Capgo
- *    (@capgo/capacitor-updater, autoUpdate). Ici on se contente d'appeler
- *    notifyAppReady() pour valider le bundle courant.
- *  - Bandeau « Mettre à jour » (changements NATIFS) : on compare la version
- *    native de l'app (versionCode) à la dernière publiée sur GitHub, et si
- *    une nouvelle APK existe on propose de l'installer en un tap.
+ *  - OTA web (contenu/design) : on télécharge le bundle web publié par la CI
+ *    (`www-bundle.zip` + manifeste `ota.json`) via le plugin Capgo en mode
+ *    MANUEL (piloté ici), et on l'active pour le prochain lancement. Silencieux.
+ *  - Bandeau « Mettre à jour » (changements NATIFS) : compare la versionCode
+ *    native à `app-version.json` ; propose d'installer la nouvelle APK en un tap.
  *
- * Tout est sans effet hors application native (web / GitHub Pages) et
- * entièrement défensif : aucune erreur ne doit remonter à l'utilisateur.
+ * Sans effet hors application native (web / GitHub Pages) et entièrement
+ * défensif : aucune erreur ne remonte à l'utilisateur.
  */
 
-const VERSION_URL =
-  "https://github.com/EmilyGuindi/Culture-G/releases/download/android-latest/app-version.json";
+const BASE = "https://github.com/EmilyGuindi/Culture-G/releases/download/android-latest";
+const OTA_URL = BASE + "/ota.json"; // { version, url (zip) }
+const VERSION_URL = BASE + "/app-version.json"; // { versionCode, versionName, apkUrl }
 
 function isNative() {
   try {
@@ -32,7 +33,7 @@ function plugin(name) {
   }
 }
 
-/** Valide le bundle OTA courant (sinon Capgo ferait un rollback). */
+/** Valide le bundle courant (sinon Capgo pourrait faire un rollback). */
 function notifyReady() {
   const updater = plugin("CapacitorUpdater");
   if (updater && typeof updater.notifyAppReady === "function") {
@@ -50,6 +51,39 @@ async function fetchJson(url) {
   const res = await fetch(url, { cache: "no-store" });
   return res.json();
 }
+
+/* ----------------------- OTA web (silencieux) ----------------------- */
+
+async function checkWebOTA() {
+  const updater = plugin("CapacitorUpdater");
+  if (!updater || typeof updater.download !== "function") return;
+  try {
+    const manifest = await fetchJson(OTA_URL);
+    if (!manifest || !manifest.version || !manifest.url) return;
+
+    let currentVersion = "";
+    try {
+      const cur = await updater.current();
+      currentVersion = (cur && cur.bundle && cur.bundle.version) || "";
+    } catch (_) {}
+
+    // Déjà à jour (ou bundle intégré identique) → rien à faire.
+    if (manifest.version === currentVersion) return;
+
+    // Télécharge le nouveau bundle web…
+    const bundle = await updater.download({ url: manifest.url, version: manifest.version });
+    const id = bundle && (bundle.id || bundle.bundleId);
+    if (!id) return;
+
+    // …et l'active au PROCHAIN lancement (pas de reload brutal en pleine session).
+    if (typeof updater.next === "function") await updater.next({ id });
+    else if (typeof updater.set === "function") await updater.set({ id });
+  } catch (_) {
+    /* hors-ligne, pas encore de bundle, etc. : on ignore silencieusement */
+  }
+}
+
+/* ------------------- Bandeau MAJ native (un tap) -------------------- */
 
 async function nativeVersionCode() {
   const app = plugin("App");
@@ -77,7 +111,7 @@ function showBanner(remote) {
   requestAnimationFrame(() => bar.classList.add("show"));
 
   const openApk = () => {
-    const url = remote.apkUrl || VERSION_URL.replace("app-version.json", "culture-g.apk");
+    const url = remote.apkUrl || BASE + "/culture-g.apk";
     const browser = plugin("Browser");
     if (browser && typeof browser.open === "function") browser.open({ url });
     else window.open(url, "_blank");
@@ -86,7 +120,6 @@ function showBanner(remote) {
   bar.querySelector("#ub-x").addEventListener("click", () => bar.remove());
 }
 
-/** Vérifie s'il existe une APK plus récente et propose de l'installer. */
 async function checkNativeUpdate() {
   try {
     const local = await nativeVersionCode();
@@ -94,13 +127,16 @@ async function checkNativeUpdate() {
     const remote = await fetchJson(VERSION_URL);
     if (remote && Number(remote.versionCode) > local) showBanner(remote);
   } catch (_) {
-    /* hors-ligne ou pas encore de version.json : on ignore silencieusement */
+    /* hors-ligne ou pas de version.json : on ignore */
   }
 }
 
 export function initUpdateCheck() {
   if (!isNative()) return; // aucun effet sur le web
   notifyReady();
-  // petit délai pour ne pas gêner le premier rendu
-  setTimeout(checkNativeUpdate, 2500);
+  // en tâche de fond, sans gêner le premier rendu
+  setTimeout(() => {
+    checkWebOTA();
+    checkNativeUpdate();
+  }, 2500);
 }

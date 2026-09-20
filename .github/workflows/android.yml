@@ -20,10 +20,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      # Clé Capgo pour les mises à jour web silencieuses (OTA). Optionnelle :
-      # si le secret CAPGO_TOKEN n'est pas défini, l'étape OTA est ignorée.
-      CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -49,22 +45,18 @@ jobs:
       - name: Assemble web assets (www/)
         run: npm run build:web
 
-      - name: Publier le bundle OTA (Capgo, si configuré)
-        if: ${{ env.CAPGO_TOKEN != '' }}
-        continue-on-error: true # ne jamais bloquer l'APK si Capgo est mal configuré
+      - name: Construire le bundle OTA (auto-hébergé, sans compte)
+        # Zippe le contenu web + un manifeste. L'app installée ira chercher ce
+        # bundle et l'appliquera elle-même (voir js/update-check.js). Gratuit.
         run: |
-          set -x
-          APPID=com.cultureg.daily
-          # Enregistre l'app (idempotent) — évite à l'utilisateur de lancer le CLI.
-          npx -y @capgo/cli@latest app add "$APPID" -a "$CAPGO_TOKEN" || true
-          # Envoie le nouveau bundle web sur le canal "production".
-          npx -y @capgo/cli@latest bundle upload "$APPID" \
-            -a "$CAPGO_TOKEN" \
-            --channel production \
-            --path www \
-            --bundle "1.0.${{ github.run_number }}"
-          # Rend ce canal actif par défaut pour que les appareils reçoivent la MAJ.
-          npx -y @capgo/cli@latest channel set production "$APPID" -a "$CAPGO_TOKEN" --state default || true
+          (cd www && zip -qr ../www-bundle.zip .)
+          cat > ota.json <<JSON
+          {
+            "version": "1.0.${{ github.run_number }}",
+            "url": "https://github.com/EmilyGuindi/Culture-G/releases/download/android-latest/www-bundle.zip"
+          }
+          JSON
+          ls -la www-bundle.zip; cat ota.json
 
       - name: Add Android platform
         run: npx cap add android
@@ -137,3 +129,5 @@ jobs:
           files: |
             culture-g.apk
             app-version.json
+            www-bundle.zip
+            ota.json

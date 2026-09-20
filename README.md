@@ -65,13 +65,12 @@ npm run android:apk
 Une APK sideloadée ne se met pas à jour toute seule comme sur le Play Store,
 mais deux mécanismes couvrent les deux types de changements :
 
-- **Contenu / design (web) → OTA silencieux.** Le plugin
-  [`@capgo/capacitor-updater`](https://capgo.app/) applique les nouveaux
-  bundles web au lancement, sans réinstaller. **À activer une fois** :
-  1. Crée un compte Capgo (palier gratuit) et enregistre l'app :
-     `npx @capgo/cli app add com.cultureg.daily` puis récupère ta clé API.
-  2. Ajoute-la dans le dépôt : *Settings → Secrets and variables → Actions →
-     New secret* nommé `CAPGO_TOKEN`. La CI enverra alors chaque build à Capgo.
+- **Contenu / design (web) → OTA silencieux, auto-hébergé (gratuit, sans
+  compte).** La CI publie à chaque build `www-bundle.zip` (le contenu web) et
+  `ota.json` (le manifeste) dans la Release `android-latest`. L'app installée,
+  via le plugin `@capgo/capacitor-updater` piloté en mode manuel
+  (`js/update-check.js`), lit le manifeste, télécharge le bundle s'il est plus
+  récent et l'applique au lancement suivant. Aucun service tiers.
 - **Changements natifs → bandeau « Mettre à jour ».** L'app compare sa
   `versionCode` à `app-version.json` (publié dans la Release) et propose
   d'installer la nouvelle APK en un tap. Rien à configurer.
