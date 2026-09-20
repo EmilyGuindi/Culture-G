@@ -57,19 +57,22 @@ export async function renderHome() {
     </header>
 
     <section class="home-hero ${goalDone ? "is-done" : ""}" style="--accent:${cat.color};">
-      <div class="hh-glow" aria-hidden="true"></div>
-      <span class="eyebrow">${goalDone ? "Déjà vue aujourd'hui" : "Ta leçon du jour"}</span>
-      <div class="hh-cat">${cat.icon} ${cat.label} · ${daily.minutes} min${status === "mastered" ? " · ✓ maîtrisée" : ""}</div>
-      <h2>${daily.title}</h2>
-      <p class="hook">${hookLine(daily)}</p>
-      <div class="hh-foot">
-        <span class="reward-tag">✨ +${status === "mastered" ? "10" : "45"} XP</span>
-        <span class="hh-time">≈ ${daily.minutes} min de lecture</span>
-      </div>
-      <div class="btn-row">
-        <button class="btn btn-primary ${goalDone ? "" : "pulse"}" id="start">
-          ${status === "mastered" ? "Relire la leçon" : goalDone ? "Reprendre la leçon" : "Commencer ma leçon"}
-        </button>
+      <div class="hh-core">
+        <div class="hh-glow" aria-hidden="true"></div>
+        <span class="eyebrow badge">${goalDone ? "Déjà vue aujourd'hui" : "Ta leçon du jour"}</span>
+        <div class="hh-cat">${cat.icon} ${cat.label} · ${daily.minutes} min${status === "mastered" ? " · ✓ maîtrisée" : ""}</div>
+        <h2>${daily.title}</h2>
+        <p class="hook">${hookLine(daily)}</p>
+        <div class="hh-foot">
+          <span class="reward-tag">✨ +${status === "mastered" ? "10" : "45"} XP</span>
+          <span class="hh-time">≈ ${daily.minutes} min de lecture</span>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary btn-arrow ${goalDone ? "" : "pulse"}" id="start">
+            <span>${status === "mastered" ? "Relire la leçon" : goalDone ? "Reprendre la leçon" : "Commencer ma leçon"}</span>
+            <span class="btn-ic" aria-hidden="true">→</span>
+          </button>
+        </div>
       </div>
     </section>
 
