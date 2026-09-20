@@ -524,6 +524,50 @@ select.input { appearance: none; cursor: pointer; }
   from { opacity: 0; transform: translateY(18px); filter: blur(7px); }
   to   { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
+
+/* ---------- Lecture : couverture illustrée + rythme ---------- */
+.lesson-cover {
+  position: relative; overflow: hidden;
+  border-radius: 24px; margin: 6px 0 2px; padding: 20px;
+  min-height: 190px; display: flex; align-items: flex-end;
+  background:
+    radial-gradient(120% 130% at 12% -10%, color-mix(in srgb, var(--accent) 60%, transparent), transparent 58%),
+    radial-gradient(120% 120% at 105% 110%, color-mix(in srgb, var(--accent) 32%, transparent), transparent 55%),
+    linear-gradient(160deg, #16324f 0%, #0B192B 100%);
+  box-shadow: var(--shadow-card),
+    inset 0 1px 1px rgba(255,255,255,0.12),
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.lesson-cover .lc-motif {
+  position: absolute; right: -12px; top: -40px;
+  font-size: 11rem; line-height: 1; opacity: 0.17;
+  transform: rotate(-8deg); pointer-events: none;
+}
+.lesson-cover .lc-body { position: relative; z-index: 1; }
+.lesson-cover .lc-chip { background: rgba(255,255,255,0.14); color: #fff; border-color: rgba(255,255,255,0.22); }
+.lesson-cover .lesson-title { color: #fff; font-size: 1.9rem; line-height: 1.12; margin: 10px 0 6px; }
+.lesson-cover .lc-meta { font-family: var(--font-mono); font-size: 0.74rem; color: rgba(255,255,255,0.72); }
+
+.lesson-lead { font-size: 1.08rem; color: var(--ink-soft); margin: 16px 2px 0; font-style: italic; }
+
+.pullquote {
+  margin: 24px 0; padding: 2px 0 2px 18px;
+  border-left: 3px solid var(--accent);
+  font-family: var(--font-editorial); font-weight: 500;
+  font-size: 1.28rem; line-height: 1.36; color: var(--ink);
+}
+
+/* Barre de progression de lecture (scroll-driven, sans JS) */
+.read-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 100%;
+  transform: scaleX(0); transform-origin: 0 50%; z-index: 30;
+  background: linear-gradient(90deg, var(--gold-2), var(--gold));
+  box-shadow: 0 0 10px rgba(231,180,90,0.6);
+  animation: readgrow linear both; animation-timeline: scroll(root);
+}
+@keyframes readgrow { to { transform: scaleX(1); } }
+
+.ai-error { margin: -6px 2px 10px; font-size: 0.85rem; color: var(--danger); }
 @keyframes breathe { 0%,100% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.12); opacity: 1; } }
 .home-hero .eyebrow { color: color-mix(in srgb, var(--accent) 72%, #fff); position: relative; }
 .home-hero .hh-cat { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.03em; color: rgba(255,255,255,0.66); margin-top: 10px; position: relative; }

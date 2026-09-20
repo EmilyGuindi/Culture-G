@@ -96,7 +96,13 @@ export async function renderLibrary(params) {
       banner.classList.remove("loading");
       btn.disabled = false;
       btn.textContent = "Réessayer";
-      alert("Génération impossible.\n\n" + (e.message || e));
+      let err = el.querySelector(".ai-error");
+      if (!err) {
+        err = document.createElement("p");
+        err.className = "ai-error";
+        banner.insertAdjacentElement("afterend", err);
+      }
+      err.textContent = "Génération impossible : " + (e.message || e);
     }
   });
 
