@@ -50,9 +50,12 @@
   --radius-lg: 20px;
   --radius-md: 14px;
   --radius-sm: 9px;
-  --shadow-soft: 0 14px 40px -24px rgba(0, 0, 0, 0.75);
-  --shadow-card: 0 24px 60px -28px rgba(0, 0, 0, 0.85);
+  /* Ombres teintées navy (portent la teinte du fond, pas du noir pur) */
+  --shadow-soft: 0 14px 40px -24px rgba(4, 12, 26, 0.82);
+  --shadow-card: 0 24px 60px -28px rgba(3, 10, 22, 0.9);
   --ring: 0 0 0 1px rgba(255, 255, 255, 0.04);
+  /* Anneau de focus clavier, teinté par l'accent contextuel */
+  --focus: 0 0 0 3px color-mix(in srgb, var(--accent) 48%, transparent);
 
   --maxw: 520px;
 }
@@ -544,7 +547,50 @@ select.input { appearance: none; cursor: pointer; }
   border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
-@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+/* =========================================================
+   PASSE DE GOÛT (skill « redesign-existing-projects »)
+   Accessibilité, chiffres tabulaires, typo, micro-feedback.
+   ========================================================= */
+
+html { scroll-behavior: smooth; }
+
+/* Focus clavier visible et net (jamais sur clic souris) */
+:focus-visible { outline: none; }
+.btn:focus-visible,
+.option:focus-visible,
+.tab:focus-visible,
+.filter:focus-visible,
+.icon-btn:focus-visible,
+.badge:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+.input:focus-visible { outline: none; border-color: var(--accent); box-shadow: var(--focus); }
+
+/* Chiffres alignés (tabular figures) sur toutes les données */
+.stat-value, .lvl-xp b, .level-badge, .big-progress .bp-num,
+.quiz-progress, .score-ring .num, .rc-val, .theme-row .pct,
+.reward-tag, .xp-pop, .day .dot, .status {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Anti-orphelins : titres équilibrés, corps « pretty » */
+h1, h2, h3 { text-wrap: balance; }
+.lesson-title, .home-hero h2, .hero-card h2, .question { text-wrap: balance; }
+p, .hook, .hero-preview, .lesson-body p, .callout p, .lvl-sub { text-wrap: pretty; }
+
+/* Micro-feedback tactile au clic (surfaces cliquables) */
+.option:not(:disabled):active,
+.topic:active,
+.badge:active,
+.filter:active,
+.streak-ribbon:active,
+.explore-card:active,
+.icon-btn:active { transform: translateY(1px) scale(0.99); }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
 
 @media (min-width: 720px) {
   :root { --maxw: 620px; }
