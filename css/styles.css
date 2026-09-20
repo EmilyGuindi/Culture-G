@@ -440,6 +440,109 @@ select.input { appearance: none; cursor: pointer; }
 .stagger > *:nth-child(5) { animation-delay: 0.26s; }
 .stagger > *:nth-child(6) { animation-delay: 0.32s; }
 
+/* =========================================================
+   HOME — premier écran repensé (accroche + vie)
+   ========================================================= */
+
+/* Aurora douce et vivante en fond de shell */
+.app-shell::after {
+  content: "";
+  position: fixed; inset: -20% -20% auto -20%; height: 70%;
+  pointer-events: none; z-index: 0; opacity: 0.5;
+  background:
+    radial-gradient(45% 55% at 20% 20%, rgba(142,123,238,0.22), transparent 70%),
+    radial-gradient(40% 50% at 85% 10%, rgba(231,180,90,0.16), transparent 70%),
+    radial-gradient(35% 45% at 60% 40%, rgba(236,111,166,0.10), transparent 70%);
+  filter: blur(10px);
+  animation: aurora 18s ease-in-out infinite alternate;
+}
+@keyframes aurora {
+  0%   { transform: translate3d(0,0,0) scale(1); }
+  50%  { transform: translate3d(2%, 2%, 0) scale(1.06); }
+  100% { transform: translate3d(-2%, -1%, 0) scale(1.03); }
+}
+
+/* Hero « leçon du jour » — la star de la page */
+.home-hero {
+  position: relative; overflow: hidden;
+  border-radius: var(--radius-lg);
+  padding: 26px 22px 22px;
+  color: #fff;
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--accent) 44%, transparent), transparent 62%),
+    linear-gradient(158deg, #221f3d 0%, #14122a 100%);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
+  box-shadow: var(--shadow-card), 0 0 0 1px rgba(255,255,255,0.03) inset,
+              0 0 60px -30px color-mix(in srgb, var(--accent) 90%, transparent);
+}
+.home-hero .hh-glow {
+  position: absolute; right: -70px; top: -90px;
+  width: 230px; height: 230px; border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 60%, transparent), transparent 70%);
+  filter: blur(6px);
+  animation: breathe 6s ease-in-out infinite;
+}
+@keyframes breathe { 0%,100% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.12); opacity: 1; } }
+.home-hero .eyebrow { color: color-mix(in srgb, var(--accent) 72%, #fff); position: relative; }
+.home-hero .hh-cat { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.03em; color: rgba(255,255,255,0.66); margin-top: 10px; position: relative; }
+.home-hero h2 { font-size: 1.72rem; line-height: 1.1; margin: 6px 0 10px; color: #fff; position: relative; }
+.home-hero .hook { margin: 0; color: rgba(255,255,255,0.86); font-size: 1.02rem; line-height: 1.5; position: relative; }
+.home-hero .hh-foot { display: flex; align-items: center; gap: 12px; margin-top: 16px; position: relative; flex-wrap: wrap; }
+.home-hero .hh-time { font-family: var(--font-mono); font-size: 0.72rem; color: rgba(255,255,255,0.55); }
+.home-hero .btn-row { position: relative; margin-top: 16px; }
+.home-hero.is-done { filter: saturate(0.92); }
+
+/* Bouton qui « respire » pour appeler au clic */
+.btn.pulse { animation: btnpulse 2.6s ease-in-out infinite; }
+@keyframes btnpulse {
+  0%, 100% { box-shadow: 0 12px 28px -12px rgba(231,180,90,0.75), 0 1px 0 rgba(255,255,255,0.35) inset, 0 0 0 0 rgba(231,180,90,0.35); }
+  50%      { box-shadow: 0 12px 30px -12px rgba(231,180,90,0.85), 0 1px 0 rgba(255,255,255,0.35) inset, 0 0 0 8px rgba(231,180,90,0); }
+}
+
+/* Ruban de série — compact, motivant */
+.streak-ribbon {
+  display: flex; align-items: center; gap: 14px;
+  margin-top: 14px; padding: 14px 16px;
+  border-radius: var(--radius-md); cursor: pointer;
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--line); box-shadow: var(--ring);
+  transition: transform 0.12s, border-color 0.2s;
+}
+.streak-ribbon:hover { transform: translateY(-1px); border-color: color-mix(in srgb, var(--gold) 45%, var(--line)); }
+.streak-ribbon.is-on { border-color: color-mix(in srgb, var(--gold) 42%, var(--line)); background: linear-gradient(180deg, color-mix(in srgb, var(--gold) 9%, var(--surface-2)), var(--surface)); }
+.streak-ribbon .sr-flame { width: 42px; height: 42px; flex: none; border-radius: 12px; display: grid; place-items: center; font-size: 1.3rem; background: rgba(255,255,255,0.05); border: 1px solid var(--line); }
+.streak-ribbon.is-on .sr-flame { background: linear-gradient(150deg, color-mix(in srgb, var(--gold) 22%, transparent), transparent); border-color: color-mix(in srgb, var(--gold) 40%, var(--line)); }
+.streak-ribbon .sr-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.streak-ribbon .sr-main strong { font-size: 0.98rem; }
+.streak-ribbon .sr-main .muted { font-size: 0.8rem; }
+.mini-week { display: flex; gap: 6px; flex: none; }
+.mini-week .mw-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid var(--line); }
+.mini-week .mw-dot.done { background: linear-gradient(180deg, var(--gold-2), var(--gold)); border-color: transparent; box-shadow: 0 0 8px -1px rgba(231,180,90,0.7); }
+.mini-week .mw-dot.today { outline: 2px solid color-mix(in srgb, var(--gold) 45%, transparent); outline-offset: 1px; }
+
+.level-card { margin-top: 14px; cursor: pointer; }
+
+/* Carte Explorer enrichie */
+.explore-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px; border-radius: var(--radius-lg); cursor: pointer;
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--line); box-shadow: var(--ring);
+  transition: transform 0.12s, border-color 0.2s;
+}
+.explore-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--violet) 45%, var(--line)); }
+.explore-card .ex-main { flex: 1; min-width: 0; }
+.explore-card .ex-main strong { font-family: var(--font-editorial); font-size: 1.1rem; }
+.explore-card .ex-main .muted { font-size: 0.85rem; margin-top: 1px; }
+.explore-card .ex-arrow { font-size: 1.4rem; color: var(--ink-faint); transition: transform 0.2s, color 0.2s; }
+.explore-card:hover .ex-arrow { transform: translateX(4px); color: var(--violet); }
+.theme-chips { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.theme-chips .tc {
+  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; font-size: 0.95rem;
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 
 @media (min-width: 720px) {
