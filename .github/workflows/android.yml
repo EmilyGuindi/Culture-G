@@ -35,8 +35,9 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      # Le runner ubuntu-latest fournit déjà le SDK Android (ANDROID_HOME),
+      # licences acceptées. Pas besoin de android-actions/setup-android
+      # (qui échoue en tentant d'installer le paquet déprécié « tools »).
 
       - name: Install dependencies
         run: npm install
