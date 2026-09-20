@@ -32,6 +32,34 @@ python3 -m http.server 8000
 
 Déployable tel quel sur **GitHub Pages** (source = branche, dossier racine).
 
+## 📱 Installer en vraie app Android (APK)
+
+L'app peut être empaquetée en **APK Android installable** (via [Capacitor](https://capacitorjs.com/)).
+L'APK embarque tout le contenu : elle **fonctionne hors-ligne**, sans lien internet.
+
+### Le plus simple : télécharger l'APK prête
+
+À chaque push, GitHub Actions compile l'APK et la publie ici :
+
+- **Releases → « Culture G — APK Android (dernière version) »** → fichier `culture-g.apk`.
+
+Ouvre ce lien depuis ton téléphone, télécharge le `.apk`, ouvre-le et installe
+(autorise si besoin « installer des applis inconnues » pour ton navigateur).
+
+Tu peux aussi lancer la compilation à la demande depuis l'onglet **Actions →
+Build Android APK → Run workflow**.
+
+### Compiler soi-même (nécessite le SDK Android + JDK 17+)
+
+```bash
+npm install
+npm run android:apk
+# → android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+`npm run build:web` assemble le dossier `www/` (les fichiers embarqués),
+`npx cap add android` génère le projet natif, et Gradle produit l'APK.
+
 ## 🧱 Architecture
 
 ```

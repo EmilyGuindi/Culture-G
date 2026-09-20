@@ -1,0 +1,9 @@
+{
+  "appId": "com.cultureg.daily",
+  "appName": "Culture G",
+  "webDir": "www",
+  "backgroundColor": "#081321",
+  "android": {
+    "backgroundColor": "#081321"
+  }
+}

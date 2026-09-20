@@ -1,0 +1,8 @@
+# Dépendances & artefacts de build (Capacitor / Android)
+node_modules/
+www/
+android/
+*.apk
+
+# Divers
+.DS_Store
