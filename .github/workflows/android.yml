@@ -52,12 +52,19 @@ jobs:
       - name: Publier le bundle OTA (Capgo, si configuré)
         if: ${{ env.CAPGO_TOKEN != '' }}
         continue-on-error: true # ne jamais bloquer l'APK si Capgo est mal configuré
-        run: >-
-          npx -y @capgo/cli@latest bundle upload
-          -a "$CAPGO_TOKEN"
-          --channel production
-          --path www
-          --bundle "1.0.${{ github.run_number }}"
+        run: |
+          set -x
+          APPID=com.cultureg.daily
+          # Enregistre l'app (idempotent) — évite à l'utilisateur de lancer le CLI.
+          npx -y @capgo/cli@latest app add "$APPID" -a "$CAPGO_TOKEN" || true
+          # Envoie le nouveau bundle web sur le canal "production".
+          npx -y @capgo/cli@latest bundle upload "$APPID" \
+            -a "$CAPGO_TOKEN" \
+            --channel production \
+            --path www \
+            --bundle "1.0.${{ github.run_number }}"
+          # Rend ce canal actif par défaut pour que les appareils reçoivent la MAJ.
+          npx -y @capgo/cli@latest channel set production "$APPID" -a "$CAPGO_TOKEN" --state default || true
 
       - name: Add Android platform
         run: npx cap add android
