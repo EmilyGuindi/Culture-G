@@ -66,10 +66,10 @@ jobs:
         # Certains plugins (Capgo) requièrent compileSdk 35 ; Capacitor 6
         # génère le projet en SDK 34 / AGP 8.2.1 (max 34). On aligne le tout.
         run: |
-          sed -i -E "s/(compileSdkVersion = )[0-9]+/\135/; s/(targetSdkVersion = )[0-9]+/\135/" android/variables.gradle
+          sed -i -E "s/(minSdkVersion = )[0-9]+/\123/; s/(compileSdkVersion = )[0-9]+/\135/; s/(targetSdkVersion = )[0-9]+/\135/" android/variables.gradle
           sed -i -E "s#(com\.android\.tools\.build:gradle:)[0-9.]+#\18.6.0#" android/build.gradle
           sed -i -E "s#(gradle-)[0-9.]+(-all\.zip)#\18.7\2#" android/gradle/wrapper/gradle-wrapper.properties
-          echo "--- variables.gradle ---"; grep -E "compileSdkVersion|targetSdkVersion" android/variables.gradle
+          echo "--- variables.gradle ---"; grep -E "minSdkVersion|compileSdkVersion|targetSdkVersion" android/variables.gradle
           echo "--- build.gradle (AGP) ---"; grep "com.android.tools.build:gradle" android/build.gradle
           echo "--- gradle wrapper ---"; grep distributionUrl android/gradle/wrapper/gradle-wrapper.properties
 
