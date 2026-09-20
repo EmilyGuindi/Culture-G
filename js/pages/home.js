@@ -4,9 +4,37 @@ import { navigate } from "../router.js";
 
 function greeting() {
   const h = new Date().getHours();
+  if (h < 6) return "Encore debout";
   if (h < 12) return "Bonjour";
   if (h < 18) return "Bel après-midi";
-  return "Bonsoir";
+  if (h < 22) return "Bonsoir";
+  return "Bonne nuit";
+}
+
+/** Petite phrase d'accroche qui change selon l'état du jour. */
+function subline({ goalDone, streak }) {
+  if (goalDone) {
+    const done = [
+      "Objectif du jour plié. Le cerveau te dit merci. 🧠",
+      "C'est fait pour aujourd'hui — reviens demain garder la série. 🔥",
+      "Bien joué. Une leçon de plus dans la besace.",
+    ];
+    return done[new Date().getDate() % done.length];
+  }
+  if (streak >= 2) return `Série de ${streak} jours en jeu. On ne lâche rien aujourd'hui.`;
+  const fresh = [
+    "5 minutes. Un truc que tu ressortiras au prochain dîner.",
+    "Une idée par jour, et la culture G devient un réflexe.",
+    "Aujourd'hui, tu vas comprendre quelque chose que la plupart des gens ignorent.",
+    "Petit effort, grand effet : 5 minutes suffisent.",
+  ];
+  return fresh[new Date().getDate() % fresh.length];
+}
+
+/** Transforme le résumé en accroche « curiosité ». */
+function hookLine(daily) {
+  const s = (daily.summary || "").trim();
+  return s;
 }
 
 export async function renderHome() {
@@ -17,6 +45,7 @@ export async function renderHome() {
   const status = store.getStatus(daily.id);
   const lvl = store.levelInfo();
   const goalDone = store.dailyGoalDone();
+  const streak = store.state.streak;
 
   const el = document.createElement("div");
   el.className = "stagger";
@@ -24,15 +53,43 @@ export async function renderHome() {
     <header class="page-head">
       <span class="eyebrow">${new Intl.DateTimeFormat("fr-FR", { weekday: "long", day: "numeric", month: "long" }).format(new Date())}</span>
       <h1>${greeting()} 👋</h1>
-      <p>5 minutes aujourd'hui pour muscler votre culture générale.</p>
+      <p>${subline({ goalDone, streak })}</p>
     </header>
 
-    <section class="level-card">
+    <section class="home-hero ${goalDone ? "is-done" : ""}" style="--accent:${cat.color};">
+      <div class="hh-glow" aria-hidden="true"></div>
+      <span class="eyebrow">${goalDone ? "Déjà vue aujourd'hui" : "Ta leçon du jour"}</span>
+      <div class="hh-cat">${cat.icon} ${cat.label} · ${daily.minutes} min${status === "mastered" ? " · ✓ maîtrisée" : ""}</div>
+      <h2>${daily.title}</h2>
+      <p class="hook">${hookLine(daily)}</p>
+      <div class="hh-foot">
+        <span class="reward-tag">✨ +${status === "mastered" ? "10" : "45"} XP</span>
+        <span class="hh-time">≈ ${daily.minutes} min de lecture</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary ${goalDone ? "" : "pulse"}" id="start">
+          ${status === "mastered" ? "Relire la leçon" : goalDone ? "Reprendre la leçon" : "Commencer ma leçon"}
+        </button>
+      </div>
+    </section>
+
+    <section class="streak-ribbon ${goalDone ? "is-on" : ""}" id="go-profile">
+      <div class="sr-flame"><span class="${streak > 0 ? "flame-anim" : ""}">${streak > 0 ? "🔥" : "✨"}</span></div>
+      <div class="sr-main">
+        <strong>${streak > 0 ? `Série de ${streak} jour${streak > 1 ? "s" : ""}` : "Lance ta série"}</strong>
+        <span class="muted">${goalDone ? "Objectif du jour validé ✓" : "Fais 1 leçon pour valider aujourd'hui"}</span>
+      </div>
+      <div class="mini-week">
+        ${week.map((d) => `<span class="mw-dot ${d.done ? "done" : ""} ${d.today ? "today" : ""}" title="${d.label}"></span>`).join("")}
+      </div>
+    </section>
+
+    <section class="level-card" id="go-profile2">
       <div class="lvl-top">
         <div class="level-badge">Niv.${lvl.index + 1}</div>
         <div class="lvl-meta">
           <div class="lvl-title">${lvl.title}</div>
-          <div class="lvl-sub">${store.earnedBadgeCount} badge${store.earnedBadgeCount > 1 ? "s" : ""} · ${store.completedCount} leçon${store.completedCount > 1 ? "s" : ""}</div>
+          <div class="lvl-sub">${store.earnedBadgeCount} badge${store.earnedBadgeCount > 1 ? "s" : ""} · ${store.completedCount} leçon${store.completedCount > 1 ? "s" : ""} · ${weekDone}/7 jours</div>
         </div>
         <div class="lvl-xp"><b>${lvl.xp}</b><br><span class="lvl-sub">XP</span></div>
       </div>
@@ -43,65 +100,23 @@ export async function renderHome() {
       </div>
     </section>
 
-    <div class="rings">
-      <div class="ring-card">
-        <div class="mini-ring" style="--p:${goalDone ? 100 : 0}%"><div class="hole">${goalDone ? "✅" : "🎯"}</div></div>
-        <div>
-          <div class="rc-val">${goalDone ? "Fait !" : "À faire"}</div>
-          <div class="rc-lbl">Objectif du jour</div>
-        </div>
-      </div>
-      <div class="ring-card">
-        <div class="mini-ring" style="--p:${Math.min(100, (store.state.streak % 7) / 7 * 100)}%"><div class="hole"><span class="flame-anim">🔥</span></div></div>
-        <div>
-          <div class="rc-val">${store.state.streak} j</div>
-          <div class="rc-lbl">Série en cours</div>
-        </div>
-      </div>
-    </div>
-
-    <section class="hero-card" style="margin-top:16px;--accent:${cat.color};">
-      <span class="eyebrow">Leçon du jour</span>
-      <h2>${daily.title}</h2>
-      <div class="hero-cat">${cat.icon} ${cat.label} · ${daily.minutes} min${status === "mastered" ? " · ✓ maîtrisée" : ""}</div>
-      <p class="hero-preview">${daily.summary}</p>
-      <div><span class="reward-tag">✨ +${status === "mastered" ? "10" : "45"} XP à gagner</span></div>
-      <div class="btn-row">
-        <button class="btn btn-primary" id="start">Commencer ma leçon</button>
-      </div>
-    </section>
-
-    <h3 class="section-title">Ma semaine</h3>
-    <section class="card">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;">
-        <strong>${weekDone}/7 jours actifs</strong>
-        <span class="muted" style="font-size:.85rem;">Objectif : chaque jour</span>
-      </div>
-      <div class="week">
-        ${week
-          .map(
-            (d) => `
-          <div class="day ${d.done ? "done" : ""} ${d.today ? "today" : ""}">
-            <div class="dot">${d.done ? "✓" : d.label}</div>
-            <div>${d.label}</div>
-          </div>`
-          )
-          .join("")}
-      </div>
-    </section>
-
     <h3 class="section-title">Explorer</h3>
-    <section class="card" id="go-library" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
-      <div>
+    <section class="explore-card" id="go-library">
+      <div class="ex-main">
         <strong>Bibliothèque</strong>
-        <div class="muted" style="font-size:.88rem;">50 sujets sur 7 thèmes à découvrir</div>
+        <div class="muted">50 sujets · 7 thèmes à explorer</div>
+        <div class="theme-chips">
+          ${lessons.getCategories().map((c) => `<span class="tc" style="--accent:${c.color};" title="${c.label}">${c.icon}</span>`).join("")}
+        </div>
       </div>
-      <span style="font-size:1.4rem;">→</span>
+      <span class="ex-arrow">→</span>
     </section>
   `;
 
   el.querySelector("#start").addEventListener("click", () => navigate("lesson", { id: daily.id }));
   el.querySelector("#go-library").addEventListener("click", () => navigate("library"));
+  el.querySelector("#go-profile").addEventListener("click", () => navigate("profile"));
+  el.querySelector("#go-profile2").addEventListener("click", () => navigate("profile"));
 
   return el;
 }
