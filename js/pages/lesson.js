@@ -1,6 +1,7 @@
 import { lessons } from "../data/provider.js";
 import { store } from "../store.js";
 import { navigate } from "../router.js";
+import { getLessonPhoto } from "../data/photos.js";
 
 export async function renderLesson(params) {
   const lesson = await lessons.getLesson(params.id);
@@ -24,6 +25,7 @@ export async function renderLesson(params) {
 
     <article style="--accent:${cat.color};">
       <header class="lesson-cover">
+        <div class="lc-photo" aria-hidden="true"></div>
         <span class="lc-motif" aria-hidden="true">${cat.icon}</span>
         <div class="lc-body">
           <span class="chip lc-chip">${cat.icon} ${cat.label}${lesson.generated ? ' · <span class="ia-tag">IA</span>' : ""}</span>
@@ -56,6 +58,27 @@ export async function renderLesson(params) {
   el.querySelector("#back").addEventListener("click", () => history.back());
   el.querySelector("#quiz").addEventListener("click", () => navigate("quiz", { id: lesson.id }));
   el.querySelector("#lib").addEventListener("click", () => navigate("library"));
+
+  // Photo réelle (option Wikipédia) : superposée à la couverture générée,
+  // qui reste le fond de secours (hors-ligne / pas de résultat).
+  getLessonPhoto(lesson)
+    .then((src) => {
+      if (!src) return;
+      const img = new Image();
+      img.onload = () => {
+        const cover = el.querySelector(".lesson-cover");
+        const layer = el.querySelector(".lc-photo");
+        if (!cover || !layer) return;
+        layer.style.backgroundImage = `url("${src}")`;
+        cover.classList.add("has-photo");
+        const credit = document.createElement("span");
+        credit.className = "lc-credit";
+        credit.textContent = "Photo : Wikipédia";
+        cover.appendChild(credit);
+      };
+      img.src = src;
+    })
+    .catch(() => {});
 
   return el;
 }

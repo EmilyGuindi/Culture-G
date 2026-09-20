@@ -1,4 +1,5 @@
 import { aiConfig, AI_MODELS } from "../ai/generator.js";
+import { photosConfig, clearPhotoCache } from "../data/photos.js";
 import { navigate } from "../router.js";
 
 export async function renderSettings() {
@@ -47,14 +48,36 @@ export async function renderSettings() {
       </div>
     </section>
 
+    <h3 class="section-title">Visuels des leçons</h3>
+    <section class="card">
+      <div class="toggle-row">
+        <div class="toggle-txt">
+          <strong>Photos réelles</strong>
+          <span class="muted">Illustre chaque leçon avec une image de Wikipédia (nécessite internet). Sinon, jolie couverture générée, hors-ligne.</span>
+        </div>
+        <button class="switch ${photosConfig.isEnabled() ? "on" : ""}" id="photos" role="switch" aria-checked="${photosConfig.isEnabled()}" aria-label="Photos réelles">
+          <span class="knob"></span>
+        </button>
+      </div>
+    </section>
+
     <div class="callout stylé" style="margin-top:18px;">
       <div class="callout-title">💡 Bon à savoir</div>
-      <p>La génération par IA fonctionne sur la version <strong>déployée</strong> (GitHub Pages) ou en local.
-      Dans l'aperçu « artifact », les appels réseau externes sont bloqués : les 50 leçons intégrées restent, mais la génération est indisponible.</p>
+      <p>La génération par IA nécessite ta propre clé Anthropic (appels facturés à l'usage).
+      Les 50 leçons intégrées et leurs couvertures fonctionnent sans clé et hors-ligne.</p>
     </div>
   `;
 
   el.querySelector("#back").addEventListener("click", () => history.back());
+
+  const photosBtn = el.querySelector("#photos");
+  photosBtn.addEventListener("click", () => {
+    const next = !photosConfig.isEnabled();
+    photosConfig.setEnabled(next);
+    if (!next) clearPhotoCache();
+    photosBtn.classList.toggle("on", next);
+    photosBtn.setAttribute("aria-checked", String(next));
+  });
 
   el.querySelector("#save").addEventListener("click", () => {
     const raw = el.querySelector("#key").value.trim();
