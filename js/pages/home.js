@@ -52,7 +52,7 @@ export async function renderHome() {
   el.innerHTML = `
     <header class="page-head">
       <span class="eyebrow">${new Intl.DateTimeFormat("fr-FR", { weekday: "long", day: "numeric", month: "long" }).format(new Date())}</span>
-      <h1>${greeting()} 👋</h1>
+      <h1>${greeting()}, ${store.name} 👋</h1>
       <p>${subline({ goalDone, streak })}</p>
     </header>
 

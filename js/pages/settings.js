@@ -1,5 +1,6 @@
 import { aiConfig, AI_MODELS } from "../ai/generator.js";
 import { photosConfig, clearPhotoCache } from "../data/photos.js";
+import { store } from "../store.js";
 import { navigate } from "../router.js";
 
 export async function renderSettings() {
@@ -14,10 +15,20 @@ export async function renderSettings() {
 
     <header class="page-head">
       <span class="eyebrow">Réglages</span>
-      <h1>Leçons par IA</h1>
-      <p>Branche une clé API Claude pour générer des leçons à l'infini, sur tous les thèmes.</p>
+      <h1>Réglages</h1>
     </header>
 
+    <section class="card">
+      <label class="form-label" for="name">Ton prénom</label>
+      <div style="display:flex;gap:10px;">
+        <input class="input" id="name" type="text" autocomplete="off" spellcheck="false"
+          placeholder="Ton prénom" value="${store.name}" />
+        <button class="btn btn-navy small" id="save-name" style="flex:none;">OK</button>
+      </div>
+      <p class="muted" style="font-size:.8rem;margin-top:6px;">Utilisé pour te saluer sur l'accueil et ton profil.</p>
+    </section>
+
+    <h3 class="section-title">Leçons par IA</h3>
     <section class="card stack">
       <div>
         <label class="form-label" for="key">Clé API Anthropic</label>
@@ -69,6 +80,17 @@ export async function renderSettings() {
   `;
 
   el.querySelector("#back").addEventListener("click", () => history.back());
+
+  const saveName = () => {
+    store.setName(el.querySelector("#name").value);
+    const b = el.querySelector("#save-name");
+    b.textContent = "✓";
+    setTimeout(() => (b.textContent = "OK"), 1000);
+  };
+  el.querySelector("#save-name").addEventListener("click", saveName);
+  el.querySelector("#name").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") saveName();
+  });
 
   const photosBtn = el.querySelector("#photos");
   photosBtn.addEventListener("click", () => {

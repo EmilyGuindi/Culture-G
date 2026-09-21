@@ -1,5 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#223A5E"/>
-  <text x="32" y="44" font-family="Georgia, serif" font-size="34" font-weight="700"
-        text-anchor="middle" fill="#C6A15B">G</text>
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Culture G">
+  <defs>
+    <linearGradient id="cg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1A3A5C"/>
+      <stop offset="1" stop-color="#081321"/>
+    </linearGradient>
+    <radialGradient id="cg-glow" cx="0.78" cy="0.16" r="0.75">
+      <stop offset="0" stop-color="#E9B85C" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#E9B85C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cg-gold" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#F6D189"/>
+      <stop offset="1" stop-color="#E3A84A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="116" fill="url(#cg-bg)"/>
+  <rect width="512" height="512" rx="116" fill="url(#cg-glow)"/>
+  <rect x="4" y="4" width="504" height="504" rx="112" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="3"/>
+
+  <!-- Monogramme « G » géométrique (indépendant des polices) -->
+  <g fill="none" stroke="url(#cg-gold)" stroke-width="60" stroke-linecap="round">
+    <!-- anse du G (C ouvert à droite) -->
+    <path d="M 373 176
+             A 132 132 0 1 0 373 336" />
+  </g>
+  <!-- barre intérieure du G -->
+  <rect x="256" y="226" width="126" height="60" rx="30" fill="url(#cg-gold)"/>
+
+  <!-- étincelle « savoir » -->
+  <path d="M 372 120
+           l 13 34 34 13 -34 13 -13 34 -13 -34 -34 -13 34 -13 z"
+        fill="#3ED0E0"/>
 </svg>

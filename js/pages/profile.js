@@ -14,9 +14,10 @@ export async function renderProfile() {
   el.className = "stagger";
 
   el.innerHTML = `
-    <header class="page-head">
-      <span class="eyebrow">Mon profil</span>
-      <h1>Ma culture G</h1>
+    <header class="profile-hero">
+      <div class="avatar">${store.initial}</div>
+      <h1>${store.name}</h1>
+      <p class="muted" style="margin-top:4px;">Ta culture générale, jour après jour.</p>
     </header>
 
     <section class="level-card">

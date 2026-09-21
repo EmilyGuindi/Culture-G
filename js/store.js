@@ -11,6 +11,8 @@
 import { CATEGORIES } from "./data/lessons.js";
 
 const KEY = "culture-g-daily:v1";
+const KEY_NAME = "culture-g:name";
+const DEFAULT_NAME = "Emily";
 
 /** Paliers de niveaux (titres = progression de culture générale). */
 export const LEVELS = [
@@ -214,6 +216,25 @@ class Store {
       isMax,
       toNext: isMax ? 0 : next.min - xp,
     };
+  }
+
+  // ---- Identité ----
+  get name() {
+    try {
+      return localStorage.getItem(KEY_NAME) || DEFAULT_NAME;
+    } catch (_) {
+      return DEFAULT_NAME;
+    }
+  }
+  setName(v) {
+    try {
+      const n = String(v || "").trim();
+      if (n) localStorage.setItem(KEY_NAME, n);
+      else localStorage.removeItem(KEY_NAME);
+    } catch (_) {}
+  }
+  get initial() {
+    return (this.name.trim()[0] || "C").toUpperCase();
   }
 
   // ---- Getters ----
