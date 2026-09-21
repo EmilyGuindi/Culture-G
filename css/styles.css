@@ -574,6 +574,23 @@ select.input { appearance: none; cursor: pointer; }
   font-size: 1.28rem; line-height: 1.36; color: var(--ink);
 }
 
+/* Texte vivant : dates/nombres accentués, termes « … » surlignés */
+.lesson-body .hl-num, .pullquote .hl-num {
+  color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.lesson-body .hl-term {
+  color: var(--ink); font-weight: 600;
+  background-image: linear-gradient(transparent 60%, color-mix(in srgb, var(--accent) 26%, transparent) 0);
+  background-repeat: no-repeat;
+}
+
+/* Apparition des paragraphes au fil du scroll (activée en JS seulement) */
+.lesson-body p.js-reveal, .pullquote.js-reveal {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.6s cubic-bezier(0.32,0.72,0,1), transform 0.6s cubic-bezier(0.32,0.72,0,1);
+}
+.lesson-body p.js-reveal.in, .pullquote.js-reveal.in { opacity: 1; transform: none; }
+
 /* Barre de progression de lecture (scroll-driven, sans JS) */
 .read-progress {
   position: fixed; top: 0; left: 0; height: 3px; width: 100%;
