@@ -567,6 +567,23 @@ select.input { appearance: none; cursor: pointer; }
 
 .lesson-lead { font-size: 1.08rem; color: var(--ink-soft); margin: 16px 2px 0; font-style: italic; }
 
+/* Chiffres clés — mini-encadrés */
+.keyfacts { display: flex; gap: 10px; margin: 18px 0 4px; flex-wrap: wrap; }
+.keyfact {
+  flex: 1 1 0; min-width: 96px;
+  padding: 14px 14px 12px; border-radius: var(--radius-md);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 12%, var(--surface-2)), var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line));
+  box-shadow: var(--ring);
+}
+.keyfact .kf-value {
+  font-family: var(--font-editorial); font-weight: 700; line-height: 1;
+  font-size: 1.5rem; color: var(--accent); font-variant-numeric: tabular-nums;
+}
+.keyfact .kf-label {
+  margin-top: 6px; font-size: 0.76rem; line-height: 1.3; color: var(--ink-faint);
+}
+
 .pullquote {
   margin: 24px 0; padding: 2px 0 2px 18px;
   border-left: 3px solid var(--accent);

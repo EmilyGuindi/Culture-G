@@ -20,6 +20,44 @@ function prefersReducedMotion() {
   }
 }
 
+/**
+ * Chiffres clés à mettre en avant. Utilise lesson.stats si fourni (ex. leçons
+ * IA), sinon extrait automatiquement pourcentages et grands nombres du corps.
+ * @returns {{value:string,label:string}[]}
+ */
+function keyFacts(lesson) {
+  if (Array.isArray(lesson.stats) && lesson.stats.length) {
+    return lesson.stats
+      .filter((s) => s && s.value)
+      .slice(0, 3)
+      .map((s) => ({ value: String(s.value), label: String(s.label || "") }));
+  }
+
+  const text = (lesson.body || []).join(" ");
+  const out = [];
+  const seen = new Set();
+  const push = (value, label) => {
+    const v = value.replace(/\s+/g, " ").trim();
+    const k = v.toLowerCase();
+    if (seen.has(k)) return;
+    seen.add(k);
+    out.push({ value: v, label: label.replace(/\s+/g, " ").trim() });
+  };
+
+  const clean = (s) => s.replace(/[.,;:!?»«"']+$/g, "").trim();
+
+  // Pourcentages : « 80 % des marchandises »
+  const pct = /(\d{1,3}\s?%)\s+([a-zà-ÿ'’]+(?:\s+[a-zà-ÿ'’]+){0,1})/gi;
+  let m;
+  while ((m = pct.exec(text)) && out.length < 3) push(m[1], clean(m[2]));
+
+  // Grands nombres : « 10 milliards de dollars », « 3 millions d'habitants »
+  const big = /(\d[\d  .,]*\s?(?:milliards?|millions?|milliers?))\s+((?:de\s+|d['’]\s?)?[a-zà-ÿ'’]+(?:\s+[a-zà-ÿ'’]+){0,1})/gi;
+  while ((m = big.exec(text)) && out.length < 3) push(clean(m[1]), clean(m[2]));
+
+  return out.slice(0, 3);
+}
+
 export async function renderLesson(params) {
   const lesson = await lessons.getLesson(params.id);
   if (!lesson) return `<div class="card">Leçon introuvable.</div>`;
@@ -54,6 +92,21 @@ export async function renderLesson(params) {
       </header>
 
       <p class="lesson-lead">${lesson.summary}</p>
+
+      ${(() => {
+        const facts = keyFacts(lesson);
+        if (!facts.length) return "";
+        return `<div class="keyfacts">
+          ${facts
+            .map(
+              (f) => `<div class="keyfact">
+                <div class="kf-value">${f.value}</div>
+                ${f.label ? `<div class="kf-label">${f.label}</div>` : ""}
+              </div>`
+            )
+            .join("")}
+        </div>`;
+      })()}
 
       <div class="lesson-body">
         ${paras.join("")}
